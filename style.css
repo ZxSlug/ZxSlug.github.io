@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    size: auto;
+    background-color: black;
+    color: white;
+    font-family: sans-serif;
+}
+img {
+    display: block;
+    max-height: 100%;
+    max-width: 100%;
+    opacity: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@keyframes fadeIn {  
+    from {  
+        opacity:0;  
+    }  
+ 
+    to {  
+        opacity:1;  
+    }  
+}
