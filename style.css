@@ -1,25 +1,60 @@
+* {
+    --shit-color: #9B36FF;
+}
+
 body {
     margin: 0;
     size: auto;
-    background-color: black;
+    background-image: url("./pics/bg.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: 100% 100%;
     color: white;
     font-family: sans-serif;
-}
-img {
-    display: block;
-    max-height: 100%;
-    max-width: 100%;
-    opacity: 0;
-    margin-left: auto;
-    margin-right: auto;
+    overflow: hidden;
 }
 
-@keyframes fadeIn {  
-    from {  
-        opacity:0;  
-    }  
- 
-    to {  
-        opacity:1;  
-    }  
+#window {
+    position: absolute;
+    --ratio: calc( 106 / 75);
+    /* put the aspect ratio width to height you want */
+    --h: min(calc(66.25vw / var(--ratio)), 84.44vh);
+    height: var(--h);
+    width: calc(var(--h) * var(--ratio));
+    background-color: white;
+    border-width: 0.5vh;
+    border-style: solid;
+    border-color: var(--shit-color);
+    display: flex;
+    flex-direction: column;
+}
+
+#windowheader {
+    padding-left: 1%;
+    padding-right: 1%;
+    display: table;
+    container-type: inline-size;
+    cursor: move;
+    height: 7%;
+    background-color: black;
+    border-bottom: 1vh solid var(--shit-color);
+}
+
+#content {
+    display: block;
+    height: 93%;
+    background-color: black;
+    background-image: url("./pics/art.png");
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-size: 100% 100%;
+}
+
+#windowtitle {
+    display:table-cell;
+    vertical-align:middle;
+    user-select: none;
+    font-family: "Minecraftia";
+    color: var(--shit-color);
+    font-size: 2cqh
 }
