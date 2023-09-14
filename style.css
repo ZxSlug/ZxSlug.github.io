@@ -1,11 +1,17 @@
 * {
     --shit-color: #9B36FF;
+    --pfp-border: black;
+
+    --bg: url("./pics/bg.png");
+    --appbg: url("./pics/art.png");
+    --pfp: url("./pics/pfp.png");
 }
 
 body {
+    user-select: none;
     margin: 0;
     size: auto;
-    background-image: url("./pics/bg.png");
+    background-image: var(--bg);
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-size: 100% 100%;
@@ -22,7 +28,7 @@ body {
     height: var(--h);
     width: calc(var(--h) * var(--ratio));
     background-color: white;
-    border-width: 0.5vh;
+    border-width: min(0.5vh, 0.5vw);
     border-style: solid;
     border-color: var(--shit-color);
     display: flex;
@@ -37,24 +43,69 @@ body {
     cursor: move;
     height: 7%;
     background-color: black;
-    border-bottom: 1vh solid var(--shit-color);
+    border-bottom: min(1vh, 1vw) solid var(--shit-color);
 }
 
 #content {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 93%;
     background-color: black;
-    background-image: url("./pics/art.png");
+    background-image: var(--appbg);
     background-repeat: no-repeat;
     background-attachment: local;
     background-size: 100% 100%;
+    padding: min(1.111vh, 0.625vw);
 }
 
 #windowtitle {
     display:table-cell;
     vertical-align:middle;
-    user-select: none;
     font-family: "Minecraftia";
     color: var(--shit-color);
-    font-size: 2cqh
+    font-size: 2cqh;
+}
+
+#taskbar {
+    width: 100%;
+    background-color: black;
+    border-top: min(0.5vh, 0.5vw) solid var(--shit-color);
+    position: absolute;
+    bottom: 0;
+}
+
+#name {
+    font-family: "terminus";
+    text-shadow: black min(0.15vw, 0.277vh) min(0.15vw, 0.277vh);
+    image-rendering: crisp-edges;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    line-height: 0;
+}
+
+#pfp {
+    border: var(--pfp-border) solid min(0.55vh, 0.31vw);
+    content: var(--pfp);
+}
+
+#desccontent {
+    padding-left: min(1.111vh, 0.625vw);
+    padding-right: min(1.111vh, 0.625vw);
+    background-color: #0000007F;
+    aspect-ratio: 119 / 69
+}
+
+#desc {
+    font-family: "Minecraftia";
+    overflow: scroll;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+#met {
+    font-family: "terminus";
+    text-shadow: black min(0.15vw, 0.277vh) min(0.15vw, 0.277vh);
+    line-height: 0;
 }

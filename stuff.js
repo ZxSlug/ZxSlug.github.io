@@ -43,12 +43,32 @@ function dragElement(elmnt) {
 }
 
 function tbarResize() {
-    tbarw = $("#windowheader").height()
-    $("#windowtitle").css("fontSize", `${tbarw/2.5}px`);
+    tbarh = $("#windowheader").height()
+    $("#windowtitle").css("fontSize", `${tbarh/2.5}px`);
+    $("#taskbar").css("height", `${tbarh*10/7}px`);
+
+    conth = $("#content").height()
+    $("#name h1").css("fontSize", `${conth*0.0471}px`)
+    $("#name img").css("fontSize", `${conth*0.0471}px`)
+
+    $("#desccontent").css("height", `${conth*0.5}px`)
+    $("#met").css("fontSize", `${conth*0.02536}px`)
+    $("#desc").css("fontSize", `${conth*0.02536}px`)
+
+    var pfp = document.getElementById("pfp")
+    pfp.height=conth*0.1739
+
+    var scrleft = document.getElementById("scrleft")
+    scrleft.height=conth*0.058
+
+    var scrright = document.getElementById("scrright")
+    scrright.height=conth*0.058
 }
 
 $(window).on("resize", function() {
     tbarResize()
 })
 
-tbarResize()
+tbarResize();
+
+tbarResize();
