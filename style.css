@@ -121,3 +121,14 @@ body {
     image-rendering: crisp-edges;
     height: 80%
 }
+
+@media screen and (orientation: portrait) {
+    body {
+        background-image: none;
+    }
+}
+
+#turnphone {
+    font-size: 0;
+    color:white;
+}

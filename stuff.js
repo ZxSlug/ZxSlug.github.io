@@ -147,3 +147,26 @@ $("#scrright").click(function() {
     page = page=0? page = 0 : page++;
     pageRefresh()
 })
+
+window.addEventListener("orientationchange", function() {
+    orientationCheck()
+  }, false);
+
+function orientationCheck() {
+    if (screen.orientation.type == "portrait-primary") {
+        $("#pfp").css("visibility", "hidden")
+        $("*").css("visibility", "hidden")
+        $("body").css("backgroundColor", "black")
+        $("body").css("backgroundImage", "none")
+        $("#turnphone").css("fontSize", "75px")
+        $("#turnphone").css("visibility", "visible")
+    } else {
+        $("#pfp").css("visibility", "visible")
+        $("*").css("visibility", "visible")
+        $("body").css("backgroundColor", "none")
+        $("body").css("backgroundImage", "var(--bg)")
+        $("#turnphone").css("fontSize", "0")
+    }
+}
+
+orientationCheck();
