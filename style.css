@@ -94,7 +94,8 @@ body {
     padding-left: min(1.111vh, 0.625vw);
     padding-right: min(1.111vh, 0.625vw);
     background-color: #0000007F;
-    aspect-ratio: 119 / 69
+    aspect-ratio: 119 / 69;
+    overflow: scroll;
 }
 
 #desc {
