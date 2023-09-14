@@ -174,3 +174,8 @@ function orientationCheck() {
 }
 
 orientationCheck();
+
+var windowthing = document.getElementById("window")
+
+$("#window").css("top", `${(window.innerHeight-$("#window").height())/2}px`)
+$("#window").css("left", `${(window.innerWidth-$("#window").width())/2}px`)
