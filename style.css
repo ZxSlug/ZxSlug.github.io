@@ -1,25 +1,134 @@
-body {
-    margin: 0;
-    size: auto;
-    background-color: black;
-    color: white;
-    font-family: sans-serif;
-}
-img {
-    display: block;
-    max-height: 100%;
-    max-width: 100%;
-    opacity: 0;
-    margin-left: auto;
-    margin-right: auto;
+* {
+    --shit-color: #9B36FF;
+    --pfp-border: black;
+
+    --bg: url("./pics/bg.png");
+    --pfp: url("./pics/pfp.png")
 }
 
-@keyframes fadeIn {  
-    from {  
-        opacity:0;  
-    }  
- 
-    to {  
-        opacity:1;  
-    }  
+body {
+    user-select: none;
+    margin: 0;
+    size: auto;
+    background-image: var(--bg);
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: 100% 100%;
+    color: #FFFFFF1F;
+    font-family: "Minecraftia";
+    overflow: hidden;
+    font-size: 1vw;
+
+}
+
+#window {
+    position: absolute;
+    --ratio: calc( 106 / 75);
+    /* put the aspect ratio width to height you want */
+    --h: min(calc(66.25vw / var(--ratio)), 84.44vh);
+    height: var(--h);
+    width: calc(var(--h) * var(--ratio));
+    background-color: white;
+    border-width: min(0.5vh, 0.5vw);
+    border-style: solid;
+    border-color: var(--shit-color);
+    display: flex;
+    flex-direction: column;
+}
+
+#windowheader {
+    padding-left: 1%;
+    padding-right: 1%;
+    display: table;
+    container-type: inline-size;
+    cursor: move;
+    height: 7%;
+    background-color: black;
+    border-bottom: min(1vh, 1vw) solid var(--shit-color);
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 93%;
+    background-color: black;
+    background-image: var(--appbg);
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-size: 100% 100%;
+    padding: min(1.111vh, 0.625vw);
+}
+
+#windowtitle {
+    display:table-cell;
+    vertical-align:middle;
+    font-family: "Minecraftia";
+    color: var(--shit-color);
+    font-size: 2cqh;
+}
+
+#name {
+    color: white;
+    font-family: "terminus";
+    text-shadow: black min(0.15vw, 0.277vh) min(0.15vw, 0.277vh);
+    image-rendering: crisp-edges;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    line-height: 0;
+}
+
+#pfp {
+    border: var(--pfp-border) solid min(0.55vh, 0.31vw);
+    content: var(--pfp);
+}
+
+#desccontent {
+    padding-left: min(1.111vh, 0.625vw);
+    padding-right: min(1.111vh, 0.625vw);
+    background-color: #0000007F;
+    aspect-ratio: 119 / 69;
+    overflow: scroll;
+}
+
+#desc {
+    font-family: "Minecraftia";
+    overflow: scroll;
+    word-wrap: break-word;
+    text-align: left;
+    color:white;
+}
+
+#met {
+    color:white;
+    font-family: "terminus";
+    text-shadow: black min(0.15vw, 0.277vh) min(0.15vw, 0.277vh);
+    line-height: 0;
+}
+
+#taskbar {
+    width: 100%;
+    background-color: black;
+    border-top: min(0.5vh, 0.5vw) solid var(--shit-color);
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+#taskbar-icon {
+    image-rendering: crisp-edges;
+    height: 80%
+}
+
+@media screen and (orientation: portrait) {
+    body {
+        background-image: none;
+    }
+}
+
+#turnphone {
+    font-size: 0;
+    color:white;
 }
