@@ -3,8 +3,7 @@
     --pfp-border: black;
 
     --bg: url("./pics/bg.png");
-    --appbg: url("./pics/art.png");
-    --pfp: url("./pics/pfp.png");
+    --pfp: url("./pics/pfp.png")
 }
 
 body {
@@ -15,9 +14,11 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-size: 100% 100%;
-    color: white;
-    font-family: sans-serif;
+    color: #FFFFFF1F;
+    font-family: "Minecraftia";
     overflow: hidden;
+    font-size: 1vw;
+
 }
 
 #window {
@@ -67,15 +68,8 @@ body {
     font-size: 2cqh;
 }
 
-#taskbar {
-    width: 100%;
-    background-color: black;
-    border-top: min(0.5vh, 0.5vw) solid var(--shit-color);
-    position: absolute;
-    bottom: 0;
-}
-
 #name {
+    color: white;
     font-family: "terminus";
     text-shadow: black min(0.15vw, 0.277vh) min(0.15vw, 0.277vh);
     image-rendering: crisp-edges;
@@ -103,10 +97,27 @@ body {
     overflow: scroll;
     word-wrap: break-word;
     text-align: left;
+    color:white;
 }
 
 #met {
+    color:white;
     font-family: "terminus";
     text-shadow: black min(0.15vw, 0.277vh) min(0.15vw, 0.277vh);
     line-height: 0;
+}
+
+#taskbar {
+    width: 100%;
+    background-color: black;
+    border-top: min(0.5vh, 0.5vw) solid var(--shit-color);
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+#taskbar-icon {
+    image-rendering: crisp-edges;
+    height: 80%
 }
