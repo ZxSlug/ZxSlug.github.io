@@ -7,6 +7,7 @@
 }
 
 body {
+    background-color: black;
     user-select: none;
     -webkit-user-select: none;
     margin: 0;
@@ -19,6 +20,8 @@ body {
     font-family: "Minecraftia";
     overflow: hidden;
     font-size: 1vw;
+    position: relative;
+    height: 100%;
 
 }
 
@@ -59,6 +62,7 @@ body {
     background-attachment: local;
     background-size: 100% 100%;
     padding: min(1.111vh, 0.625vw);
+    box-sizing: border-box;
 }
 
 #windowtitle {
