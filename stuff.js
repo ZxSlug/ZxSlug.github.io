@@ -17,8 +17,12 @@ base price - 100 robux
 
 animation prices:
 base price - 700 robux
-+50 robux per character`
-var metPage1 = "@zxslug on twitter"
++50 robux per character
+if videos are 10+ seconds it's around 100 robux (depending on difficulty)
+if videos are around 30-60 seconds it's gonna be 300 robux
+
+10-20s of animation is 1 month nitro`
+var metPage1 = "@zxslug on discord"
 
 var page = 0;
 
