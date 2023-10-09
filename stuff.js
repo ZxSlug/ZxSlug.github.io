@@ -1,6 +1,5 @@
 var textPage0 = `animator and gfx artist
 15 | guy
-animating for 3-4 years
 
 socials:
 twitter - @ZxSlug
