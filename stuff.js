@@ -11,6 +11,7 @@ proud niko plush owner`
 var metPage0 = "Met: Moldova"
 
 var textPage1 = `gfx prices:
+][<THIS PAGE IS UNDER CONSTRUCTION (rewriting?)>][
 base price - 100 robux
 +50 robux per character
 
@@ -18,9 +19,7 @@ animation prices:
 base price - 700 robux
 +50 robux per character
 if videos are 10+ seconds it's around +100 robux (depending on difficulty)
-if videos are around 30-60 seconds it's gonna be +300 robux
-
-10-20s of animation is 1 month nitro`
+if videos are around 30-60 seconds it's gonna be +300 robux`
 var metPage1 = "@zxslug on discord"
 
 var page = 0;
