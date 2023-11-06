@@ -10,13 +10,10 @@ tiktok - @zxslug
 proud niko plush owner`
 var metPage0 = "Met: Moldova"
 
-var textPage1 = `gfx prices:
-][<THIS PAGE IS UNDER CONSTRUCTION (rewriting?)>][
-base price - 100 robux
-+50 robux per character
-
-animation prices:
-base price - 700 robux
+var textPage1 = `animation prices:
+base price - 6,000 robux
+--- everything below is temporary ---
+(still haven't decided)
 +50 robux per character
 if videos are 10+ seconds it's around +100 robux (depending on difficulty)
 if videos are around 30-60 seconds it's gonna be +300 robux`
