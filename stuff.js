@@ -11,7 +11,7 @@ proud niko plush owner`
 var metPage0 = "Met: Moldova"
 
 var textPage1 = `animation prices:
-base price - 6,000 robux
+base price - 6,000 robux | $9
 --- everything below is temporary ---
 (still haven't decided)
 +50 robux per character
