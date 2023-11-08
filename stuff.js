@@ -1,4 +1,4 @@
-var textPage0 = `animator and gfx artist
+var textPage0 = `animator (1-2 years exp)
 15 | guy
 
 socials:
@@ -15,7 +15,7 @@ base price - 6,000 robux | $16.00
 --- everything below is temporary ---
 (still haven't decided)
 + [REDACTED] robux | $[REDACTED] per character
-+ [REDACTED] robux | $[REDACTED] per 10s`
++ [REDACTED] robux | $[REDACTED] per second of animation`
 var metPage1 = "@zxslug on discord"
 
 var page = 0;
