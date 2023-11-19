@@ -136,6 +136,10 @@ function pageRefresh() {
     }
 }
 
+if (window.location.hash != "#taskbar-experiment") {
+  $("#taskbar").remove();
+}
+
 tbarResize();
 
 tbarResize();
