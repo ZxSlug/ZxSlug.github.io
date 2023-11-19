@@ -187,7 +187,12 @@ window.mobileCheck = function() {
 
 function mobileAdapt() {
     if (mobileCheck()) {
+        // NOTE:
+        // i need to redo this whole section
         $("#windowheader").remove();
+
+        $("#taskbar").remove();
+
         $("#window").contents().unwrap()
         
         $("#content").css("height", "100vh")

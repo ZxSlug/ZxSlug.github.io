@@ -135,14 +135,17 @@ body {
     width: 100%;
     background-color: black;
     border-top: min(0.5vh, 0.5vw) solid var(--shit-color);
-    position: absolute;
-    bottom: 0;
     display: flex;
     justify-content: space-between;
+    position:fixed;
+    bottom: 0;
 }
 
 #taskbar-icon {
-    image-rendering: crisp-edges;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 0.6%;
+    image-rendering:crisp-edges;
     height: 80%
 }
 
