@@ -41,14 +41,22 @@ body {
 }
 
 #windowheader {
-    padding-left: 1%;
-    padding-right: 1%;
-    display: table;
-    container-type: inline-size;
+    display: flex;
+    padding-left: 0.6%;
+    padding-right: 0.6%;
     cursor: move;
     height: 7%;
     background-color: black;
     border-bottom: min(1vh, 1vw) solid var(--shit-color);
+}
+
+#windowheader img {
+    margin-top:auto;
+    margin-bottom: auto;
+    vertical-align: middle;
+    aspect-ratio: 1/1;
+    height: 98%;
+    image-rendering: crisp-edges;
 }
 
 #content {
@@ -66,11 +74,18 @@ body {
 }
 
 #windowtitle {
-    display:table-cell;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 1%;
     vertical-align:middle;
+    display: inline-block;
     font-family: "Minecraftia";
     color: var(--shit-color);
     font-size: 2cqh;
+}
+
+#maximize-button {
+    cursor: pointer;
 }
 
 #name {
@@ -82,6 +97,10 @@ body {
     justify-content: space-between;
     width: 100%;
     line-height: 0;
+}
+
+#name img {
+    cursor: pointer;
 }
 
 #pfp {
@@ -136,4 +155,15 @@ body {
 #turnphone {
     font-size: 0;
     color:white;
+}
+
+#windowheader .space {
+    width: 100%;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+#credits {
+    position:absolute;
+    z-index: -1;
 }
