@@ -1,3 +1,23 @@
+/*
+I am really
+really
+sorry
+for everyone
+who decided to just
+"huh lemme check this out"
+and stumbled upon this mess
+ - toaddx
+*/
+
+jQuery.fn.removeInlineCss = function (properties) {
+  if (properties == null) return this.removeAttr('style')
+  properties = properties.split(/\s+/)
+  return this.each(function () {
+    for (var i = 0; i < properties.length; i++)
+      this.style.removeProperty(properties[i])
+  })
+}
+
 var textPage0 = `animator (1-2 years exp)
 15 | guy
 
@@ -19,6 +39,8 @@ base price - 6,000 robux | $16.00
 var metPage1 = "@zxslug on discord"
 
 var page = 0;
+
+var maximized=false
 
 // Make the DIV element draggable:
 dragElement(document.getElementById("window"));
@@ -99,6 +121,9 @@ function tbarResize() {
 
     var scrright = document.getElementById("scrright")
     scrright.height=conth*0.058
+
+    if (maximized) {
+    }
 }
 
 $(window).on("resize", function() {
@@ -108,6 +133,43 @@ $(window).on("resize", function() {
 var desc = document.getElementById("desc")
 var nameString = document.getElementById("namestring")
 var metString = document.getElementById("met")
+var content = document.getElementById("content")
+var button = document.getElementById("maximize-button")
+
+function maximizeRefresh() {
+  console.log(maximized)
+  if (!maximized) {
+    location.reload() //i'm lazy af
+/*     $("#windowheader").css("display", "flex")
+    $("#minimize-button").removeInlineCss()
+    $("body").removeInlineCss()
+    $("#window").removeInlineCss("border")
+    $("#taskbar").css("display", "flex")
+    $("#credits").css("display", "block")
+    tbarResize()
+    dragElement() */
+  } else {
+    let buttonwidth = button.width
+    $("body").css("background-image", "none")
+    $("#credits").css("display", "none")
+    $("#windowheader").css("display", "none");
+    $("#taskbar").css("display", "none")
+    $("#window").css("border", "none")
+    $("#window").css("top", "0")
+/*     $("#window").css("left", "0") */
+    $("#content").css("height", "100vh")
+/*     $("#content").css("width", "100vw") */
+    $("#window").css("height", "100vh")
+    //$("#windowheader").css("position", "absolute")
+    //$("#windowheader").css("width", "100vw")
+    $("#minimize-button").css("display", "block")
+    $("#minimize-button").css("width", buttonwidth)
+
+    $("#content").css("width", (window.innerHeight/69*106))
+    $("#window").css("left", ((window.innerWidth-(window.innerHeight/69*106))/2))
+  }
+  //tbarResize()
+}
 
 function pageRefresh() {
     switch (page) {
@@ -156,6 +218,16 @@ $("#scrright").click(function() {
     pageRefresh()
 })
 
+$("#maximize-button").click(function() {
+    maximized = !maximized;
+    maximizeRefresh()
+})
+
+$("#minimize-button").click(function() {
+  maximized = !maximized;
+  maximizeRefresh()
+})
+
 window.addEventListener("orientationchange", function() {
     orientationCheck()
   }, false);
@@ -191,7 +263,7 @@ window.mobileCheck = function() {
 
 function mobileAdapt() {
     if (mobileCheck()) {
-        // NOTE:
+       /*  // NOTE:
         // i need to redo this whole section
         $("#windowheader").remove();
 
@@ -215,7 +287,11 @@ function mobileAdapt() {
         //$("#content").css("left", `${(window.innerWidth-(window.innerHeight/69*106))/2}px`)
 
         console.log(`${window.innerHeight} : ${window.innerWidth}\n${window.innerHeight/69*106}`)
-        console.log($("#content").width())
+        console.log($("#content").width()) */
+
+        $("#minimize-button").remove();
+        maximized=true;
+        maximizeRefresh();
 
         
     }

@@ -170,3 +170,14 @@ body {
     position:absolute;
     z-index: -1;
 }
+
+#minimize-button {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1%;
+    cursor: pointer;
+    width: 3%;
+    image-rendering: crisp-edges;
+}
