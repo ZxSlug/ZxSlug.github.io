@@ -259,7 +259,7 @@ function orientationCheck() {
     }
 }
 
-//orientationCheck();
+orientationCheck();
 
 var windowthing = document.getElementById("window")
 

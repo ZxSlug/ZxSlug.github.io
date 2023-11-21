@@ -181,3 +181,7 @@ body {
     width: 3%;
     image-rendering: crisp-edges;
 }
+
+.red {
+    color: FF0000FF;
+}
