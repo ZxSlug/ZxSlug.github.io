@@ -46,11 +46,11 @@ var maximized=false
 dragElement(document.getElementById("window"));
 
 function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0, finalX = 0, finalY = 0;
   if (document.getElementById(elmnt.id + "header")) {
     // if present, the header is where you move the DIV from:
     document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-    //document.getElementById(elmnt.id + "header").ontouchstart = dragMouseDown;
+    document.getElementById(elmnt.id + "header").ontouchstart = dragMouseDown;
   } else {
     // otherwise, move the DIV from anywhere inside the DIV:
     elmnt.onmousedown = dragMouseDown;
@@ -67,7 +67,7 @@ function dragElement(elmnt) {
     
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
-    //document.ontouchmove = elementDrag;
+    document.ontouchmove = elementDrag;
     //document.addEventListener("ontouchmove", elementDrag, {passive: false});
 
     //e.preventDefault();
@@ -81,9 +81,24 @@ function dragElement(elmnt) {
     pos2 = pos4 - e.clientY;
     pos3 = e.clientX;
     pos4 = e.clientY;
+
+    finalX = elmnt.offsetTop - pos2
+    finalY = elmnt.offsetLeft - pos1
+
+    if (finalX > 0) {
+      finalX = finalX > window.innerHeight-20? window.innerHeight-20 : finalX
+    } else {
+      finalX = finalX < 0? 0 : finalX
+    }
+
+    if (finalY > 0) {
+      finalY = finalY > window.innerWidth-20? window.innerWidth-20 : finalY
+    } else {
+      finalY = finalY < 0? 0 : finalY
+    }
     // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    elmnt.style.top = finalX + "px";
+    elmnt.style.left = finalY + "px";
 
     e.preventDefault();
   }
@@ -91,10 +106,10 @@ function dragElement(elmnt) {
   function closeDragElement() {
     // stop moving when mouse button is released:
     document.onmouseup = null;
-    //document.ontouchend = null;
+    document.ontouchend = null;
 
     document.onmousemove = null;
-    //document.ontouchmove = null;
+    document.ontouchmove = null;
   }
 }
 
@@ -121,9 +136,6 @@ function tbarResize() {
 
     var scrright = document.getElementById("scrright")
     scrright.height=conth*0.058
-
-    if (maximized) {
-    }
 }
 
 $(window).on("resize", function() {
@@ -137,7 +149,6 @@ var content = document.getElementById("content")
 var button = document.getElementById("maximize-button")
 
 function maximizeRefresh() {
-  console.log(maximized)
   if (!maximized) {
     location.reload() //i'm lazy af
 /*     $("#windowheader").css("display", "flex")
@@ -248,7 +259,7 @@ function orientationCheck() {
     }
 }
 
-orientationCheck();
+//orientationCheck();
 
 var windowthing = document.getElementById("window")
 
@@ -298,3 +309,31 @@ function mobileAdapt() {
 }
 
 mobileAdapt()
+var kcodeProgress = 0;
+
+function konami() {
+  let audio = new Audio('./random_shit/item_get.wav');
+  audio.play();
+}
+
+$("body").keydown(function(e) {
+  let kcode = ["38", "38", "40", "40", "37", "39", "37", "39", "66", "65", "13"]
+  if(e.keyCode == 37) { // left
+    page = page=0? page = 1 : page--;
+    pageRefresh()
+  }
+  else if(e.keyCode == 39) { // right
+    page = page=0? page = 0 : page++;
+    pageRefresh()
+  }
+  if (kcodeProgress < kcode.length) {
+    if (e.keyCode == kcode[kcodeProgress]) {
+      kcodeProgress++;
+      if (kcodeProgress == kcode.length) konami();
+    } else {
+      kcodeProgress = 0;
+    }
+  }
+});
+
+tbarResize()
