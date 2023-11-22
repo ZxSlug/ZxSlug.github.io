@@ -118,6 +118,7 @@ function dragElement(elmnt) {
 function tbarResize() {
     tbarh = $("#windowheader").height()
     $("#windowtitle").css("fontSize", `${tbarh/2.5}px`);
+    $("#time").css("fontSize", `${tbarh/2.5}px`);
     $("#windowtitle").css("width", `${tbarh/0.03}px`);
     $("#windowheader img").css("height", `${tbarh*0.8}px`);
     $("#taskbar").css("height", `${tbarh*10/7}px`);
