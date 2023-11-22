@@ -1,4 +1,4 @@
-* {
+:root {
     --shit-color: #9B36FF;
     --pfp-border: black;
 
@@ -184,4 +184,12 @@ body {
 
 .red {
     color: FF0000FF;
+}
+
+#time {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 0.6%;
+    color: var(--shit-color);
+    font-size: 2vh
 }

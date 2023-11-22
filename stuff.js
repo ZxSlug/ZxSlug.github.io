@@ -9,14 +9,14 @@ and stumbled upon this mess
  - toaddx
 */
 
-jQuery.fn.removeInlineCss = function (properties) {
+/* jQuery.fn.removeInlineCss = function (properties) {
   if (properties == null) return this.removeAttr('style')
   properties = properties.split(/\s+/)
   return this.each(function () {
     for (var i = 0; i < properties.length; i++)
       this.style.removeProperty(properties[i])
   })
-}
+} - thx Yukulélé on StackOverflow */
 
 var textPage0 = `animator (1-2 years exp)
 15 | guy
@@ -41,6 +41,8 @@ var metPage1 = "@zxslug on discord"
 var page = 0;
 
 var maximized=false
+
+var searchParams = new URLSearchParams(window.location.search)
 
 // Make the DIV element draggable:
 dragElement(document.getElementById("window"));
@@ -80,21 +82,21 @@ function dragElement(elmnt) {
     pos1 = pos3 - e.clientX;
     pos2 = pos4 - e.clientY;
     pos3 = e.clientX;
-    pos4 = e.clientY;
+    pos4 = e.clientY>window.innerWidth? window.innerWidth : e.clientY;
 
     finalX = elmnt.offsetTop - pos2
     finalY = elmnt.offsetLeft - pos1
 
     if (finalX > 0) {
-      finalX = finalX > window.innerHeight-20? window.innerHeight-20 : finalX
+      finalX = finalX > window.innerHeight-(elmnt.offsetHeight/4)? window.innerHeight-(elmnt.offsetHeight/4) : finalX
     } else {
       finalX = finalX < 0? 0 : finalX
     }
 
     if (finalY > 0) {
-      finalY = finalY > window.innerWidth-20? window.innerWidth-20 : finalY
+      finalY = finalY > window.innerWidth-(elmnt.offsetWidth/4)? window.innerWidth-(elmnt.offsetWidth/4) : finalY
     } else {
-      finalY = finalY < 0? 0 : finalY
+      finalY = finalY < -(elmnt.offsetWidth/4)? -(elmnt.offsetWidth/4) : finalY
     }
     // set the element's new position:
     elmnt.style.top = finalX + "px";
@@ -159,7 +161,7 @@ function maximizeRefresh() {
     $("#credits").css("display", "block")
     tbarResize()
     dragElement() */
-  } else {
+  } else if (!searchParams.has("old")) {
     let buttonwidth = button.width
     $("body").css("background-image", "none")
     $("#credits").css("display", "none")
@@ -180,6 +182,15 @@ function maximizeRefresh() {
     $("#window").css("left", ((window.innerWidth-(window.innerHeight/69*106))/2))
   }
   //tbarResize()
+}
+
+async function rgb() {
+  let test = 0;
+  while (1) {
+    test = test==360? 0 : test+5;
+    document.documentElement.style.setProperty('--shit-color', `hsl(${test}, 100%, 50%)`)
+    await new Promise(resolve => setTimeout(resolve, 100));
+  }
 }
 
 function pageRefresh() {
@@ -208,10 +219,41 @@ function pageRefresh() {
         }
     }
 }
+function old() {
+  $("#windowheader").remove();
 
-if (window.location.hash != "#taskbar-experiment") {
   $("#taskbar").remove();
+
+  $("#window").contents().unwrap()
+  
+  $("#content").css("height", "100vh")
+
+  $("#content").css("padding", "2%");
+
+  //$("#content").css("maxWidth", `${window.innerHeight/69*106}px`)
+
+  $("#content").css("width", `100vw`)
+
+  //$("#content").css("width", `min(100vw, ${$("#content").height()/69*106}px`)
+  $("#content").css("position", "absolute")
+
+  $("#content").css("top", "0");
+  $("#content").css("left", "0");
+  //$("#content").css("left", `${(window.innerWidth-(window.innerHeight/69*106))/2}px`)
 }
+
+if (searchParams.has("break")) throw EvalError;
+if (searchParams.has("old")) old();
+/* if (searchParams.has("rgb")) rgb(); */
+if (searchParams.has("no-tb")) $("#taskbar").remove();
+if (searchParams.has("creditless")) $("#credits").remove();
+if (searchParams.has("color")) {
+  let color = searchParams.get("color")
+  if (color != undefined) {
+    document.documentElement.style.setProperty('--shit-color', `#${color}`)
+  }
+}
+
 
 tbarResize();
 
@@ -274,37 +316,9 @@ window.mobileCheck = function() {
 
 function mobileAdapt() {
     if (mobileCheck()) {
-       /*  // NOTE:
-        // i need to redo this whole section
-        $("#windowheader").remove();
-
-        $("#taskbar").remove();
-
-        $("#window").contents().unwrap()
-        
-        $("#content").css("height", "100vh")
-
-        $("#content").css("padding", "2%");
-
-        //$("#content").css("maxWidth", `${window.innerHeight/69*106}px`)
-
-        $("#content").css("width", `100vw`)
-
-        //$("#content").css("width", `min(100vw, ${$("#content").height()/69*106}px`)
-        $("#content").css("position", "absolute")
-
-        $("#content").css("top", "0");
-        $("#content").css("left", "0");
-        //$("#content").css("left", `${(window.innerWidth-(window.innerHeight/69*106))/2}px`)
-
-        console.log(`${window.innerHeight} : ${window.innerWidth}\n${window.innerHeight/69*106}`)
-        console.log($("#content").width()) */
-
         $("#minimize-button").remove();
         maximized=true;
         maximizeRefresh();
-
-        
     }
 }
 
@@ -314,6 +328,7 @@ var kcodeProgress = 0;
 function konami() {
   let audio = new Audio('./random_shit/item_get.wav');
   audio.play();
+  rgb()
 }
 
 $("body").keydown(function(e) {
@@ -337,3 +352,12 @@ $("body").keydown(function(e) {
 });
 
 tbarResize()
+
+let date = new Date()
+let currentTime = date.toLocaleString("en-US", {
+  hour12: true,
+  minute: "numeric",
+  hour: "numeric"
+})
+
+$("#time").text(currentTime)
