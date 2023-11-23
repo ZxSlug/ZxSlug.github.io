@@ -114,6 +114,7 @@ body {
     background-color: #0000007F;
     aspect-ratio: 119 / 69;
     overflow: scroll;
+    overflow-wrap: break-word;
 }
 
 #desc {
@@ -149,11 +150,11 @@ body {
     height: 80%
 }
 
-@media screen and (orientation: portrait) {
+/* @media screen and (orientation: portrait) {
     body {
         background-image: none;
     }
-}
+} */
 
 #turnphone {
     font-size: 0;
@@ -192,4 +193,12 @@ body {
     margin-right: 0.6%;
     color: var(--shit-color);
     font-size: 1.5vmin
+}
+
+#fullscreen-recommended {
+    bottom: 0;
+    position: fixed;
+    display: none;
+    font-size: 1vh;
+    z-index: 999;
 }

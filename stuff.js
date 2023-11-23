@@ -9,14 +9,14 @@ and stumbled upon this mess
  - toaddx
 */
 
-/* jQuery.fn.removeInlineCss = function (properties) {
+jQuery.fn.removeInlineCss = function (properties) {
   if (properties == null) return this.removeAttr('style')
   properties = properties.split(/\s+/)
   return this.each(function () {
     for (var i = 0; i < properties.length; i++)
       this.style.removeProperty(properties[i])
   })
-} - thx Yukulélé on StackOverflow */
+} //- thx Yukulélé on StackOverflow
 
 var textPage0 = `animator (1-2 years exp)
 15 | guy
@@ -82,19 +82,19 @@ function dragElement(elmnt) {
     pos1 = pos3 - e.clientX;
     pos2 = pos4 - e.clientY;
     pos3 = e.clientX;
-    pos4 = e.clientY>window.innerWidth? window.innerWidth : e.clientY;
+    pos4 = e.clientY;
 
     finalX = elmnt.offsetTop - pos2
     finalY = elmnt.offsetLeft - pos1
 
     if (finalX > 0) {
-      finalX = finalX > window.innerHeight-(elmnt.offsetHeight/4)? window.innerHeight-(elmnt.offsetHeight/4) : finalX
+      finalX = finalX > window.innerHeight-(elmnt.offsetHeight/4)? window.innerHeight-(elmnt.offsetHeight/4) : finalX //buggy
     } else {
       finalX = finalX < 0? 0 : finalX
     }
 
     if (finalY > 0) {
-      finalY = finalY > window.innerWidth-(elmnt.offsetWidth/4)? window.innerWidth-(elmnt.offsetWidth/4) : finalY
+      finalY = finalY > window.innerWidth-(elmnt.offsetWidth/4)? window.innerWidth-(elmnt.offsetWidth/4) : finalY //buggy
     } else {
       finalY = finalY < -(elmnt.offsetWidth/4)? -(elmnt.offsetWidth/4) : finalY
     }
@@ -139,6 +139,14 @@ function tbarResize() {
 
     var scrright = document.getElementById("scrright")
     scrright.height=conth*0.058
+
+    if (maximized) maximizeRefresh()
+
+    if ($("#desccontent").width() > window.innerWidth) {
+      $("#desccontent").width(innerWidth)
+    } else {
+      $("#desccontent").removeInlineCss("width")
+    }
 }
 
 $(window).on("resize", function() {
@@ -163,7 +171,6 @@ function maximizeRefresh() {
     tbarResize()
     dragElement() */
   } else if (!searchParams.has("old")) {
-    let buttonwidth = button.width
     $("body").css("background-image", "none")
     $("#credits").css("display", "none")
     $("#windowheader").css("display", "none");
@@ -177,10 +184,15 @@ function maximizeRefresh() {
     //$("#windowheader").css("position", "absolute")
     //$("#windowheader").css("width", "100vw")
     $("#minimize-button").css("display", "block")
-    $("#minimize-button").css("width", buttonwidth)
+    $("#minimize-button").css("width", `${Math.min(window.innerWidth, window.innerHeight)/21.4}px`)
 
-    $("#content").css("width", (window.innerHeight/69*106))
-    $("#window").css("left", ((window.innerWidth-(window.innerHeight/69*106))/2))
+    if (window.innerWidth/window.innerHeight >= 106/69) {
+      $("#content").css("width", (window.innerHeight/69*106))
+      $("#window").css("left", ((window.innerWidth-(window.innerHeight/69*106))/2))
+    } else {
+      $("#content").css("width", window.innerWidth)
+      $("#window").css("left", 0)
+    }
   }
   //tbarResize()
 }
@@ -275,6 +287,7 @@ $("#scrright").click(function() {
 $("#maximize-button").click(function() {
     maximized = !maximized;
     maximizeRefresh()
+    tbarResize()
 })
 
 $("#minimize-button").click(function() {
@@ -288,17 +301,19 @@ window.addEventListener("orientationchange", function() {
 
 function orientationCheck() {
     if (screen.orientation.type == "portrait-primary") {
-        $("#pfp").css("visibility", "hidden")
+/*         $("#pfp").css("visibility", "hidden")
         $("*").css("visibility", "hidden")
         $("body").css("backgroundImage", "none")
         $("#turnphone").css("fontSize", "75px")
-        $("#turnphone").css("visibility", "visible")
+        $("#turnphone").css("visibility", "visible") */
+        $("#fullscreen-recommended").css("display", "block")
     } else {
-        $("#pfp").css("visibility", "visible")
+/*         $("#pfp").css("visibility", "visible")
         $("*").css("visibility", "visible")
         $("body").css("backgroundImage", "var(--bg)")
-        $("#turnphone").css("fontSize", "0")
+        $("#turnphone").css("fontSize", "0") */
         //mobileAdapt()
+        $("#fullscreen-recommended").css("display", "none")
     }
 }
 
