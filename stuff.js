@@ -68,7 +68,7 @@ function dragElement(elmnt) {
     pos3 = e.clientX;
     pos4 = e.clientY;
     document.onmouseup = closeDragElement;
-    //document.ontouchend = closeDragElement;
+    document.ontouchend = closeDragElement;
     
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
@@ -301,6 +301,10 @@ $("#maximize-button").click(function() {
 $("#minimize-button").click(function() {
   maximized = !maximized;
   maximizeRefresh()
+})
+
+$("#close-button").click(function() {
+  history.back()
 })
 
 window.addEventListener("orientationchange", function() {
