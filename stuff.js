@@ -379,9 +379,12 @@ function christmas() {
 
     document.documentElement.style.setProperty('--shit-color', `#afe4f0`)
 
+    if (date.getDay == 25 && date.getMonth == 11) $("#credits").prepend("Merry Christmas!<br><br>")
+    if (date.getDay == 1 && date.getMonth == 0) $("#credits").prepend("Happy New Year!<br><br>")
+
 }
 
-if ((date.getMonth() == 11 && (searchParams.get("holiday") == "christmas" || !searchParams.has("holiday"))|| searchParams.get("holiday") == "christmas")) christmas()
+if (((date.getMonth() == 11 || date.getMonth() == 0) && (searchParams.get("holiday") == "christmas" || !searchParams.has("holiday"))|| searchParams.get("holiday") == "christmas")) christmas()
 
 if (searchParams.has("color")) {
   let color = searchParams.get("color")
