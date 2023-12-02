@@ -151,6 +151,36 @@ body {
     height: 80%
 }
 
+
+.taskbar-element {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 0.6%;
+    image-rendering:crisp-edges;
+    height: 80%;
+    aspect-ratio: 15/4;
+    background-color: var(--shit-color);
+    color: black;
+    display: inline-flex;
+    
+}
+
+.taskbar-element span {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 4%;
+}
+
+.taskbar-element img {
+    margin-left: 4%;
+    margin-top: auto;
+    margin-bottom: auto;
+    filter: brightness(0%);
+    height: 60%;
+}
+
 #turnphone {
     font-size: 0;
     color:white;
@@ -193,3 +223,4 @@ body {
     font-size: 1vh;
     z-index: 999;
 }
+
