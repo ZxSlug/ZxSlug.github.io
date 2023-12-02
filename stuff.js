@@ -44,6 +44,9 @@ var maximized=false
 
 var searchParams = new URLSearchParams(window.location.search)
 
+var prevX;
+var prevY;
+
 // Make the DIV element draggable:
 dragElement(document.getElementById("window"));
 
@@ -161,15 +164,18 @@ var button = document.getElementById("maximize-button")
 
 function maximizeRefresh() {
   if (!maximized) {
-    location.reload() //i'm lazy af
-/*     $("#windowheader").css("display", "flex")
+    $("#windowheader").css("display", "flex")
     $("#minimize-button").removeInlineCss()
     $("body").removeInlineCss()
     $("#window").removeInlineCss("border")
+    $("#window").removeInlineCss("height")
     $("#taskbar").css("display", "flex")
     $("#credits").css("display", "block")
+    $("#content").removeInlineCss("width")
+    $("#content").removeInlineCss("height")
     tbarResize()
-    dragElement() */
+    document.getElementById("window").style.top = prevX
+    document.getElementById("window").style.left = prevY
   } else if (!searchParams.has("old")) {
     $("body").css("background-image", "none")
     $("#credits").css("display", "none")
@@ -285,6 +291,8 @@ $("#scrright").click(function() {
 })
 
 $("#maximize-button").click(function() {
+    prevX = document.getElementById("window").style.top
+    prevY = document.getElementById("window").style.left
     maximized = !maximized;
     maximizeRefresh()
     tbarResize()
@@ -298,26 +306,6 @@ $("#minimize-button").click(function() {
 window.addEventListener("orientationchange", function() {
     orientationCheck()
   }, false);
-
-function orientationCheck() {
-    if (screen.orientation.type == "portrait-primary") {
-/*         $("#pfp").css("visibility", "hidden")
-        $("*").css("visibility", "hidden")
-        $("body").css("backgroundImage", "none")
-        $("#turnphone").css("fontSize", "75px")
-        $("#turnphone").css("visibility", "visible") */
-        $("#fullscreen-recommended").css("display", "block")
-    } else {
-/*         $("#pfp").css("visibility", "visible")
-        $("*").css("visibility", "visible")
-        $("body").css("backgroundImage", "var(--bg)")
-        $("#turnphone").css("fontSize", "0") */
-        //mobileAdapt()
-        $("#fullscreen-recommended").css("display", "none")
-    }
-}
-
-orientationCheck();
 
 var windowthing = document.getElementById("window")
 
@@ -335,6 +323,7 @@ function mobileAdapt() {
         $("#minimize-button").remove();
         maximized=true;
         maximizeRefresh();
+        tbarResize();
     }
 }
 
