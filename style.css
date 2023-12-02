@@ -150,12 +150,6 @@ body {
     height: 80%
 }
 
-/* @media screen and (orientation: portrait) {
-    body {
-        background-image: none;
-    }
-} */
-
 #turnphone {
     font-size: 0;
     color:white;
@@ -181,10 +175,6 @@ body {
     cursor: pointer;
     width: 3%;
     image-rendering: crisp-edges;
-}
-
-.red {
-    color: FF0000FF;
 }
 
 #time {
