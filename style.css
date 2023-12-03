@@ -100,6 +100,11 @@ body {
     line-height: 0;
 }
 
+#namestring {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #name img {
     cursor: pointer;
 }
@@ -160,7 +165,6 @@ body {
     height: 80%;
     aspect-ratio: 15/4;
     background-color: var(--shit-color);
-    color: black;
     display: inline-flex;
     
 }
@@ -177,16 +181,27 @@ body {
     margin-left: 4%;
     margin-top: auto;
     margin-bottom: auto;
-    filter: brightness(0%);
     height: 60%;
 }
 
-#turnphone {
-    font-size: 0;
-    color:white;
+.inactive-taskbar-element {
+    background-color: black;
+    box-sizing: border-box;
+    color: var(--shit-color);
+    border-style: solid;
+    border-color: var(--shit-color);
 }
 
-#windowheader .space {
+.active-taskbar-element {
+    background-color: var(--shit-color);
+    color: black;
+}
+
+.active-taskbar-element img {
+    filter: brightness(0);
+}
+
+.space {
     width: 100%;
     margin-left:auto;
     margin-right: auto;
@@ -213,7 +228,8 @@ body {
     margin-bottom: auto;
     margin-right: 0.6%;
     color: var(--shit-color);
-    font-size: 1.5vmin
+    font-size: 1.5vmin;
+    width: 13%;
 }
 
 #fullscreen-recommended {
@@ -224,3 +240,10 @@ body {
     z-index: 999;
 }
 
+#minimize-fit-button {
+    display: none;
+    margin: 1%;
+    cursor: pointer;
+    image-rendering: crisp-edges;
+    background-color: black;
+}
