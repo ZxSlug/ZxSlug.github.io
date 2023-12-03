@@ -56,7 +56,7 @@ body {
     vertical-align: middle;
     aspect-ratio: 1/1;
     height: 98%;
-    image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }
 
 #content {
@@ -93,7 +93,7 @@ body {
     color: white;
     font-family: "terminus";
     text-shadow: black min(0.15vw, 0.277vh) min(0.15vw, 0.277vh);
-    image-rendering: crisp-edges;
+    image-rendering: pixelated;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -152,7 +152,7 @@ body {
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 0.6%;
-    image-rendering:crisp-edges;
+    image-rendering:pixelated;
     height: 80%
 }
 
@@ -161,7 +161,7 @@ body {
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 0.6%;
-    image-rendering:crisp-edges;
+    image-rendering:pixelated;
     height: 80%;
     aspect-ratio: 15/4;
     background-color: var(--shit-color);
@@ -220,7 +220,7 @@ body {
     margin: 1%;
     cursor: pointer;
     width: 3%;
-    image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }
 
 #time {
@@ -244,6 +244,6 @@ body {
     display: none;
     margin: 1%;
     cursor: pointer;
-    image-rendering: crisp-edges;
+    image-rendering: pixelated;
     background-color: black;
 }
