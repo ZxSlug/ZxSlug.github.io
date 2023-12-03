@@ -93,10 +93,10 @@ function dragElement(elmnt) {
     if (finalX > 0) {
       finalX = finalX > window.innerHeight-(elmnt.offsetHeight/4)? window.innerHeight-(elmnt.offsetHeight/4) : finalX //buggy
       //$(document).css("filter", "brightness(1)")
-      document.documentElement.style.filter = "brightness(100%)";
+/*       document.documentElement.style.filter = "brightness(100%)"; */
     } else {
       finalX = finalX < 0? 0 : finalX
-      document.documentElement.style.filter = "brightness(40%)";
+/*       document.documentElement.style.filter = "brightness(40%)"; */
     }
 
     if (finalY > 0) {
@@ -119,12 +119,12 @@ function dragElement(elmnt) {
     document.onmousemove = null;
     document.ontouchmove = null;
 
-    if (finalX == 0) {
+/*     if (finalX == 0 && maximized==false) {
       maximized=true
       maximizeRefresh()
       tbarResize()
       maximizeRefresh()
-    }
+    } */
   }
 }
 
@@ -332,9 +332,12 @@ $("#scrright").click(function() {
 $("#maximize-button").click(function() {
     prevX = document.getElementById("window").style.top
     prevY = document.getElementById("window").style.left
-    maximized = !maximized;
-    maximizeRefresh()
-    tbarResize()
+    console.log(prevX)
+    if (prevX != 0) {
+      maximized = !maximized;
+      maximizeRefresh()
+      tbarResize()
+    }
 })
 
 $("#minimize-fit-button").click(function() {
@@ -359,6 +362,7 @@ var windowthing = document.getElementById("window")
 
 $("#window").css("top", `${(window.innerHeight-$("#window").height())/2}px`)
 $("#window").css("left", `${(window.innerWidth-$("#window").width())/2}px`)
+
 
 window.mobileCheck = function() {
     let check = false;
