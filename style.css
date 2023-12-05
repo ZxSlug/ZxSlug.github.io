@@ -242,8 +242,8 @@ body {
 
 #minimize-fit-button {
     display: none;
-    margin: 1%;
     cursor: pointer;
     image-rendering: pixelated;
     background-color: black;
+    margin-left: 0.6%;
 }
