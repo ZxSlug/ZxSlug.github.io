@@ -25,22 +25,25 @@ body {
 
 }
 
-#window {
+.window {
     position: absolute;
-    --ratio: calc( 106 / 75);
-    /* put the aspect ratio width to height you want */
-    --h: min(calc(66.25vw / var(--ratio)), 84.44vh);
-    height: var(--h);
-    width: calc(var(--h) * var(--ratio));
     background-color: white;
     border-width: min(0.5vh, 0.5vw);
     border-style: solid;
     border-color: var(--shit-color);
     display: flex;
     flex-direction: column;
+    color: var(--shit-color)
 }
 
-#windowheader {
+#profile-window {
+    --ratio: calc( 106 / 75);
+    --h: min(calc(66.25vw / var(--ratio)), 84.44vh);
+    height: var(--h);
+    width: calc(var(--h) * var(--ratio));
+}
+
+.windowheader {
     display: flex;
     padding-left: 0.6%;
     padding-right: 0.6%;
@@ -50,21 +53,16 @@ body {
     border-bottom: min(1vh, 1vw) solid var(--shit-color);
 }
 
-#windowheader img {
-    margin-top:auto;
-    margin-bottom: auto;
-    vertical-align: middle;
-    aspect-ratio: 1/1;
-    height: 98%;
-    image-rendering: pixelated;
+.content {
+    background-color: black;
+    box-sizing: border-box;
 }
 
-#content {
+#profile-content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 93%;
-    background-color: black;
     background-image: var(--appbg);
     background-repeat: no-repeat;
     background-attachment: local;
@@ -73,7 +71,8 @@ body {
     box-sizing: border-box;
 }
 
-#windowtitle {
+.windowtitle {
+    width:100%;
     margin-top: auto;
     margin-bottom: auto;
     padding-left: 1%;
@@ -81,10 +80,19 @@ body {
     display: inline-block;
     font-family: "Minecraftia";
     color: var(--shit-color);
-    font-size: 2cqh;
 }
 
-#maximize-button, #close-button {
+.titlebar-element {
+    cursor: pointer;
+    margin-top:auto;
+    margin-bottom: auto;
+    vertical-align: middle;
+    aspect-ratio: 1/1;
+    height: 98%;
+    image-rendering: pixelated;
+}
+
+.titlebar-navbutton {
     padding-left: 0.6%;
     cursor: pointer;
 }
@@ -146,6 +154,7 @@ body {
     justify-content: space-between;
     position:fixed;
     bottom: 0;
+    z-index: 999;
 }
 
 #taskbar-icon {
@@ -153,7 +162,7 @@ body {
     margin-bottom: auto;
     margin-left: 0.6%;
     image-rendering:pixelated;
-    height: 80%
+    height: 80%;
 }
 
 
@@ -246,4 +255,50 @@ body {
     image-rendering: pixelated;
     background-color: black;
     margin-left: 0.6%;
+}
+
+@keyframes this-is-temporary-i-swear {
+    0% { transform: translateX(0) translateY(0)}
+    25% { transform: translateX(2px) translateY(-2px)}
+    50% { transform: translateX(-2px)}
+    75% { transform: translateX(2px) translateY(2px)}
+    100% { transform: translateX(0) translateY(0)}
+}
+
+#disclaimer {
+    position: absolute;
+    animation: this-is-temporary-i-swear .175s infinite;
+    color: red;
+}
+
+#settings-content {
+    height: 93%;
+    display: flex;
+    width: 100%;
+    padding: 0.6%
+}
+
+#settings-category {
+    text-align: middle;
+    padding-left:auto;
+    padding-right: auto;
+    width: 90%;
+    margin: 10%;
+}
+
+input {
+    color: var(--shit-color);
+    font-family: "Minecraftia";
+    background-color: black;
+    border-color: var(--shit-color);
+    border-style:solid
+}
+
+input:focus {outline:none;}
+
+#settings-window {
+    --ratio: calc( 3 / 2);
+    --h: 0.5*min(calc(66.25vw / var(--ratio)), 84.44vh);
+    height: var(--h);
+    width: calc(var(--h) * var(--ratio));
 }

@@ -47,22 +47,27 @@ var searchParams = new URLSearchParams(window.location.search)
 var prevX;
 var prevY;
 
-// Make the DIV element draggable:
-dragElement(document.getElementById("window"));
+var mainWindowHeight, contentCommonHeight;
 
-function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0, finalX = 0, finalY = 0;
-  if (document.getElementById(elmnt.id + "header")) {
+// Make the DIV element draggable:
+
+function dragWindow(elmnt) {
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0, finalX = 0, finalY = 0;
+  let winheader = elmnt.querySelector(".windowheader")
+  if (winheader) {
     // if present, the header is where you move the DIV from:
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-    document.getElementById(elmnt.id + "header").ontouchstart = dragMouseDown;
+    winheader.onmousedown = dragMouseDown;
+    winheader.ontouchstart = dragMouseDown;
   } else {
     // otherwise, move the DIV from anywhere inside the DIV:
     elmnt.onmousedown = dragMouseDown;
     elmnt.ontouchstart = dragMouseDown;
   }
+  titlebarFunctionButtons(elmnt)
 
   function dragMouseDown(e) {
+    $(".window").css("z-index", "0");
+    e.srcElement.parentNode.parentNode.style.zIndex = 1;
     e = e || window.event;
     // get the mouse cursor position at startup:
     pos3 = e.clientX;
@@ -92,11 +97,8 @@ function dragElement(elmnt) {
 
     if (finalX > 0) {
       finalX = finalX > window.innerHeight-(elmnt.offsetHeight/4)? window.innerHeight-(elmnt.offsetHeight/4) : finalX //buggy
-      //$(document).css("filter", "brightness(1)")
-/*       document.documentElement.style.filter = "brightness(100%)"; */
     } else {
       finalX = finalX < 0? 0 : finalX
-/*       document.documentElement.style.filter = "brightness(40%)"; */
     }
 
     if (finalY > 0) {
@@ -128,34 +130,54 @@ function dragElement(elmnt) {
   }
 }
 
+function titlebarFunctionButtons(element) {
+  let winheader = element.querySelector(".windowheader")
+  if (winheader) {
+    let exitbutton = winheader.querySelector(".close-button")
+    let maximizebutton = winheader.querySelector(".maximize-button")
+
+    if (exitbutton) exitbutton.onclick = closeWindow;
+    if (maximizebutton) maximizebutton.onclick = null;
+  }
+
+  function closeWindow(e) {
+    let window = e.srcElement.parentNode.parentNode
+    window.style.display = "none"
+    window.setAttribute("closed", true)
+  }
+  
+}
 function tbarResize() {
-    tbarh = $("#windowheader").height()
-    $("#windowtitle").css("fontSize", `${tbarh/2.5}px`);
-    $(".taskbar-element").css("fontSize", `${tbarh/2.5}px`);
-    $(".taskbar-element span").css("height", `${tbarh/2.5+10}px`);
-    $("#time").css("fontSize", `${tbarh/2.5}px`);
-    $("#windowtitle").css("width", `${tbarh/0.03}px`);
-    $("#windowheader img").css("height", `${tbarh*0.8}px`);
-    $("#taskbar").css("height", `${tbarh*10/7}px`);
+  //--h: min(calc(66.25vw / var(--ratio)), 84.44vh);
+    mainWindowHeight = Math.min(0.4825*window.innerWidth, 0.8444*window.innerHeight)
+    titlebarCommonHeight = 0.07*mainWindowHeight;
+    contentCommonHeight = mainWindowHeight-titlebarCommonHeight;
+    //tbarh = $("#windowheader").height()
+    $(".windowheader").height(titlebarCommonHeight);
+    $(".titlebar-element").height(`${titlebarCommonHeight*0.8}px`)
+    $("body").css("fontSize", `${titlebarCommonHeight/2.5}px`);
+    $(".taskbar-element").css("fontSize", `${titlebarCommonHeight/2.5}px`);
+    $(".taskbar-element span").css("height", `${titlebarCommonHeight/2.5+10}px`);
+    $("#time").css("fontSize", `${titlebarCommonHeight/2.5}px`);
+    $("#taskbar").css("height", `${titlebarCommonHeight*10/7}px`);
 
-    conth = $("#content").height()
-    $("#name h1").css("fontSize", `${conth*0.0471}px`)
-    $("#name img").css("fontSize", `${conth*0.0471}px`)
+    $("#name h1").css("fontSize", `${contentCommonHeight*0.0471}px`)
+    $("#name img").css("fontSize", `${contentCommonHeight*0.0471}px`)
 
-    $("#desccontent").css("height", `${conth*0.5}px`)
-    $("#met").css("fontSize", `${conth*0.02536}px`)
-    $("#desc").css("fontSize", `${conth*0.02536}px`)
+    $("#desccontent").css("height", `${contentCommonHeight*0.5}px`)
+    $("#met").css("fontSize", `${contentCommonHeight*0.02536}px`)
+    $("#desc").css("fontSize", `${contentCommonHeight*0.02536}px`)
 
-    $(".inactive-taskbar-element").css("border-width", `${conth*0.005}px`)
+    $(".inactive-taskbar-element").css("border-width", `${contentCommonHeight*0.005}px`)
 
     var pfp = document.getElementById("pfp")
-    pfp.height=conth*0.1739
+    pfp.height=contentCommonHeight*0.1739
 
     var scrleft = document.getElementById("scrleft")
-    scrleft.height=conth*0.058
+    scrleft.height=contentCommonHeight*0.058
 
     var scrright = document.getElementById("scrright")
-    scrright.height=conth*0.058
+    scrright.height=contentCommonHeight*0.058
 
     if (maximized) maximizeRefresh()
 
@@ -179,12 +201,12 @@ var button = document.getElementById("maximize-button")
 function maximizeRefresh() {
   document.documentElement.style.filter = "brightness(100%)";
   if (!maximized) {
-    $("#windowheader").css("display", "flex")
+    $(".windowheader").css("display", "flex")
     $("#minimize-button").removeInlineCss()
     $("#minimize-fit-button").removeInlineCss()
     $("body").removeInlineCss()
-    $("#window").removeInlineCss("border")
-    $("#window").removeInlineCss("height")
+    $(".window").removeInlineCss("border")
+    $(".window").removeInlineCss("height")
     $("#taskbar").css("display", "flex")
     $("#credits").css("display", "block")
     $("#content").removeInlineCss("width")
@@ -195,7 +217,7 @@ function maximizeRefresh() {
   } else if (!searchParams.has("old")) {
     $("body").css("background-image", "none")
     $("#credits").css("display", "none")
-    $("#windowheader").css("display", "none");
+    $(".windowheader").css("display", "none");
     $("#taskbar").css("display", "none")
     $("#window").css("border", "none")
     $("#window").css("top", "0")
@@ -238,7 +260,7 @@ function pageRefresh() {
             desc.innerText = textPage0;
             nameString.innerHTML = "ZxSlug"
             metString.innerHTML = metPage0
-            $("#content").css("backgroundImage", "url(./pics/art.png)")
+            document.documentElement.style.setProperty("--appbg", "url(./pics/art.png)")
             $("#pfp").css("visibility", "visible")
             page = 1;
             break;
@@ -247,7 +269,7 @@ function pageRefresh() {
             desc.innerText = textPage1;
             nameString.innerHTML = "Slug Comms"
             metString.innerHTML = metPage1
-            $("#content").css("backgroundImage", "url(./pics/art2.png)")
+            document.documentElement.style.setProperty("--appbg", "url(./pics/art2.png)")
             $("#pfp").css("visibility", "hidden")
             page = 0;
             break;
@@ -259,7 +281,7 @@ function pageRefresh() {
     }
 }
 function old() {
-  $("#windowheader").remove();
+  $("#windowheader").css();
 
   $("#taskbar").remove();
 
@@ -410,3 +432,7 @@ $("body").keydown(function(e) {
 });
 
 tbarResize()
+
+for (const object of document.getElementsByClassName("window")) {
+  dragWindow(object)
+}

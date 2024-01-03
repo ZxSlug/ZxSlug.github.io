@@ -11,16 +11,17 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     </head>
     <body>
-        <div id="window">
-            <div id="windowheader">
-                <img src="pics/app_icon.webp" draggable="false">
-                <div id="windowtitle">
+        <div class="window" id="profile-window">
+            <div class="windowheader">
+                <img class="titlebar-element" src="pics/app_icon.webp" draggable="false">
+                <div class="windowtitle">
                     zxslug's "carrd"
                 </div>
-                <img id="maximize-button" src="pics/maximize.webp" draggable="false">
-                <img id="close-button" src="pics/close.webp" draggable="false">
+<!--                 <span class="space"></span> -->
+                <img class="titlebar-element titlebar-navbutton maximize-button" src="pics/maximize.webp" draggable="false">
+                <img class="titlebar-element titlebar-navbutton close-button" src="pics/close.webp" draggable="false">
             </div>
-            <div id="content">
+            <div class="content" id="profile-content">
                 <div id="name">
                     <img id="scrleft" draggable="false" src="./pics/scroll_left.png">
                     <h1 id="namestring">this is embarrassing</h1>
@@ -41,7 +42,31 @@
                 </div>
             </div>
         </div>
+
+        <div class="window" id="settings-window" closed="true" style="display:none">
+            <div class="windowheader">
+                <img class="titlebar-element" src="pics/customize_icon.webp" draggable="false">
+                <div class="windowtitle">
+                    Customize
+                </div>
+                <img class="titlebar-element titlebar-navbutton close-button" src="pics/close.webp" draggable="false">
+            </div>
+            <div class="content" id="settings-content">
+                <div class="settings-category">
+                    System colour
+                    <br>
+                    <input>
+                </div>
+                <div class="settings-category">
+                    Wallpaper
+                    <br>
+                    <input>
+                </div>
+            </div>
+        </div>
         <div id="credits">
+            <span id="disclaimer">This is getting a massive reshuffling (?) it's very buggy</span>
+            <br>
             made with ♡ by @toaddx
             <br>Credits:
             <br>OneShot devs - all these assets were taken from OneShot files lmao-
@@ -49,25 +74,11 @@
             <br>Yukulélé on StackOverflow - some JS code I stole
             <br>Pajasevi on GitHub - snow effect
             <br>v0.42 build 21
-            <br>
-            <br> Params:
-            <br> ?no-tb - disable taskbar
-            <br> ?old - fix phone compatibility
-            <br> ?creditless - remove this text
-            <br> ?color=XXXXXX - specify hex color code
         </div>
         <div id="taskbar">
             <div class="taskbar-element active-taskbar-element">
                 <img src="pics/app_icon.webp" draggable="false">
-                <span>zxslug's ...</span>
-            </div>
-            <div class="taskbar-element inactive-taskbar-element">
-                <img src="pics/obs_icon.webp" draggable="false">
-                <span>OBS</span>
-            </div>
-            <div class="taskbar-element inactive-taskbar-element">
-                <img src="pics/gx_icon.webp" draggable="false">
-                <span>Opera GX ...</span>
+                <span>taskbar icons are getting a revamp!</span>
             </div>
             <span class="space"></span>
             <span id="time">06:00 AM</span>
