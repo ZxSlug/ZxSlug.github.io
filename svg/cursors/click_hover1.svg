@@ -1,0 +1,4 @@
+<svg viewBox="0 0 14 14" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+    <path d="m5 13h5v-1h1v-2h1v-7h-6v-1h-1v-1h-1v1h-1v3h-1v1h-1v3h1v1h1v1h1v1h1v1" fill-rule="evenodd" style="fill: black;"/>
+    <path d="m5 12h5v-1h-5v1m-1-2v-6h7v6h-7m-1 0h1v-2h-1v2m-1-1h1v-3h-1v3m3-4h1v-1h-1v1m2 0h1v-1h-1v1m2 0h1v-1h-1v1m-5-1v-2h1v2" fill-rule="evenodd" style="fill: white;"/>
+</svg>

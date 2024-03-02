@@ -1,0 +1,68 @@
+title = "ZxSlug"
+
+[background]
+enabled = true
+filename = "profile-background.png"
+
+
+[met]
+enabled = true
+text = "Moldova"
+
+
+[description]
+enabled = true
+text = """
+    Animator (1-2 years experience)
+    Age: 15
+    Guy
+
+    Socials:
+    twitter - @ZxSlug
+    youtube - @ZxSlug
+    roblox - ZxSIug (with an i not an L)
+    tiktok - @zxslug
+
+    Proud Niko Plush Owner
+    """
+
+
+[social]
+enabled = true
+
+[social.twitter]
+enabled = true
+url = "https://twitter.com/zxslug"
+icon_path = "svg/socials/twitter_logo.svg"
+
+[social.youtube]
+enabled = true
+url = "https://youtube.com/@ZxSlug"
+icon_path = "svg/socials/youtube_logo.svg"
+
+[social.tiktok]
+enabled = true
+url = "https://tiktok.com/@ZxSlug"
+icon_path = "svg/socials/tiktok_logo.svg"
+
+[social.roblox]
+enabled = true
+url = "https://roblox.com/users/904216401"
+icon_path = "svg/socials/roblox_logo.svg"
+
+[social.discord]
+enabled = true
+url = "https://discord.com/users/1010989813874311199"
+icon_path = "svg/socials/discord_logo.svg"
+
+
+[resources]
+enabled=true
+
+[resources.pfp]
+enabled = true
+filename = "pfp.jpg" # The image needs to be stored in the images folder.
+
+[resources.sprites]
+enabled = false
+filename = "" # The gif needs to be stored in the images folder.

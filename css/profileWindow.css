@@ -1,0 +1,154 @@
+.profile-window:not(.maximized-window) {
+
+    width: 71em;
+    height: 50em;
+
+    .profile-description {
+        width: 40em;
+        height: 23em;
+    }
+}
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 0.5em;
+
+    height: 100%;
+
+    background-color: black;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-size: 100% 100%;
+}
+
+.profile-scrollbar {
+    width: 100%;
+    display: flex;
+}
+
+.profile-scrollbar svg {
+    margin-top: 0.5em;
+    height: 2.5em;
+    filter: drop-shadow(0.20em 0.20em black);
+    fill: white;
+}
+
+.profile-scrollbar svg:hover {
+    fill: gray
+}
+
+.profile-page-name {
+    font-family: "Terminus";
+    text-align: center;
+    font-size: 3em;
+    color: white;
+    text-shadow: black 0.075em 0.075em;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: super;
+    box-sizing: border-box;
+    margin-bottom: 0.25em;
+}
+
+.profile-text {
+    height: 50%;
+
+    position: relative;
+    display:flex;
+    flex-direction: column;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+.profile-met {
+    color: white;
+    text-shadow: black 0.1em 0.1em;
+}
+
+.profile-info {
+    display: flex;
+    height: 100%;
+}
+
+.profile-description {
+    overflow: scroll;
+    word-wrap: break-word;
+    text-align: left;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    aspect-ratio: 119 / 69;
+    
+    color:white;
+    background-color: #0000007F;
+
+    padding: 0.5em;
+}
+
+.profile-socials {
+    margin-left: 0.5em;
+    display: flex;
+    flex-direction: column;
+
+    width: max-content;
+}
+
+.profile-social-link {
+    width: 3em;
+    height: 3em;
+
+    background-color: #0000007F;
+    padding: 0.5em;
+    box-sizing: border-box;
+    margin-bottom: 0.5em;
+}
+
+.profile-social-link:hover {
+    background-color: #000000AF;
+}
+
+.profile-social-link svg {
+    fill: white;
+    filter: drop-shadow(0.15em 0.15em 0em black)
+}
+
+.profile-images {
+    margin-top: auto;
+}
+
+.profile-pfp {
+    height: 8em;
+    box-sizing: border-box;
+    border: 0.5em solid white;
+}
+
+.profile-sprites {
+    margin-left: 1em;
+    height: 6em;
+}
+
+link {
+    display: none;
+}
+
+@media screen and (orientation: portrait) {
+
+    .profile-window.maximized-window {
+        .profile-info {
+            flex-direction: column;
+        }
+        .profile-socials {
+            flex-direction: row;
+            margin-left: 0;
+            margin-top: 0.5em;
+        }
+
+        .profile-social-link {
+            margin-right: 0.5em;
+        }
+    }
+    
+}

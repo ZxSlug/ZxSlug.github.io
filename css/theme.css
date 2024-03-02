@@ -1,0 +1,378 @@
+/* General things */
+
+:root {
+    --theme-color: 155, 54, 255; /* Default/fallback color */
+    --wallpaper-image: url("../images/wallpaper.png");
+}
+
+body {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+
+    cursor: none;
+
+    background-color: black;
+    background-image: var(--wallpaper-image);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+
+    color: rgb(var(--theme-color));
+    font-family: "Minecraftia";
+    font-size: 1em;
+    image-rendering: pixelated;
+
+    touch-action: manipulation;
+
+    overflow-y: hidden;
+    position: fixed;
+}
+
+/* Mouse Cursor */
+
+#cursor {
+    position: absolute;
+    width: 3em;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.hovering-cursor {
+    animation: cursor-hover 1s step-end infinite;
+}
+
+@keyframes cursor-hover {
+    0% {
+        content: url("../svg/cursors/click_hover0.svg");
+    }
+    75% {
+        content: url("../svg/cursors/click_hover1.svg");
+    }
+}
+
+.grab-hover-cursor {
+    content: url("../svg/cursors/grab_hover.svg");
+}
+
+.grab-hold-cursor {
+    content: url("../svg/cursors/grab_hold.svg");
+}
+
+a {
+    cursor: none;
+}
+
+/* Desktop stuff */
+
+#desktop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    display: table;
+
+    padding: 1em;
+}
+
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+
+    width: 9em;
+    height: 6em;
+
+    padding: 1em;
+
+    margin: 0.5em;
+}
+
+.desktop-icon-name {
+    margin-top: 0.5em;
+
+    height: 1.5em;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    background-color: black;
+}
+
+.desktop-icon-icon {
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 3em;
+    height: 3em;
+
+    fill: rgb(var(--theme-color));
+
+    filter: drop-shadow(0.20em 0.20em black);
+}
+
+.desktop-icon:hover:not(.highlighted-desktop-icon) {
+    background-color: rgba(var(--theme-color), 0.16);
+    box-shadow: inset 0 0 0 0.5em rgba(var(--theme-color), 0.33);
+}
+
+.highlighted-desktop-icon {
+    background-color: rgba(var(--theme-color), 0.33);
+    box-shadow: inset 0 0 0 0.5em rgba(var(--theme-color), 0.66);
+}
+
+/* Window stuff */
+
+.window {
+    z-index: 1;
+
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+
+    border: 0.5em solid rgb(var(--theme-color));
+    background-color: black;
+    transition: 0.025s;
+}
+
+.minimized-window {
+    translate: 0px 100vh;
+    transition: 1s;
+}
+
+.unminimized-window {
+    transition: 1s;
+}
+
+.maximized-window {
+    border: none;
+    height: 100vh;
+    width: 100vw;
+}
+
+.maximized-window .window-titlebar {
+    width: 100vw;
+}
+
+.maximized-window .window-content {
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.window-titlebar {
+    background-color: black;
+    height: 4em;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+
+    border-bottom: 0.5em solid rgb(var(--theme-color));
+    padding: 0.25em;
+}
+
+.window-titlebar * {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin: 0.125em;
+}
+
+.window-titlebar svg {
+    height: 2.5em;
+    fill: rgb(var(--theme-color));
+}
+
+.window-title {
+    display: flex;
+}
+
+.window-icon {
+    margin-right: 0.5em;
+}
+
+.window-header-text {
+    font-size: 1.5em;
+    margin-top: 0.25em;
+}
+
+.window-controls {
+    margin-left: auto;
+}
+
+.window-control:hover {
+    filter:brightness(50%);
+}
+
+.window-content {
+    padding: 0.25em;
+}
+
+/* Error messsages */
+
+.error-message {
+    display: flex;
+}
+
+.error-message .window-content {
+    padding: 0.5em;
+    line-height: 2em;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.error-message-buttons {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.error-message-button {
+    flex: 1;
+
+    max-width: 33%;
+    width: max-content;
+
+    height: 2em;
+    line-height: 2.75em;
+
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+
+    justify-content: center;
+}
+
+.error-message-button:not(:hover) {
+    border: 0.25em solid rgba(var(--theme-color), 1);
+}
+
+.error-message-button:hover {
+    border: 0.25em solid rgba(var(--theme-color), 0.5);
+}
+
+/* Taskbar */
+
+#taskbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 6em;
+    box-sizing: border-box;
+    z-index: 99;
+    padding-left: 0.5em;
+
+    display: flex;
+    flex-direction: row;
+
+    background-color: black;
+    border-top: 0.5em solid rgb(var(--theme-color));
+
+    overflow-x: overlay;
+    overflow-y: hidden
+}
+
+#taskbar-icons {
+    display: flex;
+    flex-direction: row;
+}
+
+.taskbar-icon {
+    flex: 1;
+
+    display: flex;
+    flex-direction: row;
+
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.taskbar-icon-icon {
+    margin-left: 1em;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 2.5em;
+}
+
+.taskbar-icon-name {
+    margin: 0.5em;
+    margin-left: 0.25em;
+    margin-top: 0.8em;
+/*     margin-right: 1em; */
+    font-size: 1.5em;
+}
+
+.taskbar-icon-active {
+    background-color: rgb(var(--theme-color));
+    color: black;
+}
+
+.taskbar-icon-active .taskbar-icon-icon {
+    fill: black
+}
+
+.taskbar-icon-inactive {
+    background-color: black;
+    color: rgb(var(--theme-color));
+
+    box-shadow: inset 0 0 0 0.5em rgba(var(--theme-color), 0.33);
+}
+
+.taskbar-icon-inactive .taskbar-icon-icon {
+    fill: rgb(var(--theme-color));
+}
+
+#taskbar-clock {
+    margin-top: 1.25em;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: 1em;
+
+    min-width: max-content;
+
+    font-size: 1.5em;
+    text-align: right;
+}
+
+#taskbar-hide-button {
+    fill: rgb(var(--theme-color));
+    margin: 1em;
+    margin-left: 0;
+
+    min-width: 4em;
+}
+
+#taskbar-unhide-button {
+    fill: rgb(var(--theme-color));
+    margin: 1em;
+    margin-left: 0;
+
+    display: none;
+
+    min-width: 4em;
+}
+
+#taskbar-hide-button:hover, #taskbar-unhide-button:hover {
+    filter: brightness(50%);
+}
+
+@media screen and (orientation: portrait) {
+    .error-message {
+        width: fit-content;
+        overflow: scroll;
+        word-wrap: break-word;
+    }
+    .error-message .window-content {
+        overflow: scroll;
+        word-wrap: break-word;
+    }
+}

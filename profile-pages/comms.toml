@@ -1,0 +1,43 @@
+title = "ZxSlug's Comms"
+
+[background]
+enabled = true
+filename = "comms-background.png"
+
+
+[met]
+enabled = false
+text = "Moldova"
+
+
+[description]
+enabled = true
+text = """
+    Animation prices:
+    base price - 6,000 robux | $16.00
+    --- everything below is temporary ---
+    (still haven't decided)
+    + [REDACTED] robux | $[REDACTED] per character
+    + [REDACTED] robux | $[REDACTED] per second of animation
+    """
+
+
+[social]
+enabled = true
+
+[social.discord]
+enabled = true
+url = "https://discord.com/users/1010989813874311199"
+icon_path = "svg/socials/discord_logo.svg"
+
+
+[resources]
+enabled=true
+
+[resources.pfp]
+enabled = false
+filename = "pfp.jpg" # The image needs to be stored in the images folder.
+
+[resources.sprites]
+enabled = false
+filename = "" # The gif needs to be stored in the images folder.

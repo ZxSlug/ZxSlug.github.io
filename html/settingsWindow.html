@@ -1,0 +1,30 @@
+<div class="window settings-window" window-titlebar-name="Settings" window-titlebar-icon="apps/settings_app_icon" has-maximize-button="false">
+    <div class="window-content settings-content">
+        <div class="settings-element">
+            <span class="settings-element-label">Theme:</span>
+            <div class="settings-choice-scroll settings-theme-color">
+                <img src="./svg/ui/scroll_left.svg" onload="SVGInject(this)" class="hoverable settings-choice-scroll-left settings-choice-scroll-button">
+                <span class="hoverable settings-choice-value settings-choice-value-editable" contenteditable="true" spellcheck="false">purple</span>
+                <img src="./svg/ui/scroll_right.svg" onload="SVGInject(this)" class="hoverable settings-choice-scroll-right settings-choice-scroll-button">
+            </div>
+        </div>
+        <div class="settings-element">
+            <span class="settings-element-label">Page Volume: <span class="settings-slider-value">100</span>%</span>
+            <div class="settings-slider settings-volume" setting-changed="volume">
+                <img src="./svg/ui/scroll_left.svg" onload="SVGInject(this)" class="hoverable settings-choice-scroll-left settings-choice-scroll-button">
+                <!-- <input class="settings-slider-value" type="range" min="0" max="100" value="100"> -->
+                <div class="settings-choice-slider">
+                    <span class="settings-choice-slider-progress" style="width: 100%"></span>
+                    <img class="settings-choice-slider-thumb grabbable" src="./svg/ui/slider_indicator.svg" onload="SVGInject(this)" style="left: 90%">
+                </div>
+                <img src="./svg/ui/scroll_right.svg" onload="SVGInject(this)" class="hoverable settings-choice-scroll-right settings-choice-scroll-button">
+            </div>
+        </div>
+        <div class="settings-element">
+            <span class="settings-element-label">ADVANCED USERS ONLY</span>
+            <span class="hoverable settings-button" onclick="resetLocalStorage()">Reset LocalStorage</span>
+            <span class="hoverable settings-button" onclick="enableRGB()"><span style="color: red">R</span><span style="color: green">G</span><span style="color: blue">B</span> Mode</span>
+        </div>
+    </div>
+    <script src="./js/settingsWindow.js"></script>
+</div>
