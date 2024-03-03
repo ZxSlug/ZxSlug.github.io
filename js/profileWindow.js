@@ -85,7 +85,7 @@ async function changeDescription(descriptionObject) {
         $(".profile-description").css("visibility", "");
 
         if (descriptionObject.text != undefined && descriptionObject.text != "") {
-            $(".profile-description").html(descriptionObject.text.replaceAll("\r\n", "<br>"));
+            $(".profile-description").html(descriptionObject.text.replaceAll("\n", "<br>"));
         } else {
             console.warn("The description object string is empty or missing. The text will not be changed.");
         }
