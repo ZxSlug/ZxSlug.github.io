@@ -95,6 +95,8 @@ async function enableRGB() {
     }, 100);
 }
 
+
+$("body").off("click", ".settings-theme-color .settings-choice-scroll-left");
 $("body").on("click", ".settings-theme-color .settings-choice-scroll-left", async (eventObject) => {
     let index = Object.keys(colorArray).length-1;;
     if (localStorage.getItem("theme-color") in colorArray) {
@@ -106,6 +108,7 @@ $("body").on("click", ".settings-theme-color .settings-choice-scroll-left", asyn
     document.querySelector(":root").style.setProperty("--theme-color", `${rgbFromText.red}, ${rgbFromText.green}, ${rgbFromText.blue}`);
 });
 
+$("body").off("click", ".settings-theme-color .settings-choice-scroll-right");
 $("body").on("click", ".settings-theme-color .settings-choice-scroll-right", async (eventObject) => {
     let index = 1;
     if (localStorage.getItem("theme-color") in colorArray) {
@@ -123,6 +126,8 @@ var sliderProgress;
 var sliderThumb;
 var settingsSliderValue;
 var sliderSetting;
+
+$("body").off("mousedown touchstart", ".settings-slider");
 $("body").on("mousedown touchstart", ".settings-slider", async (eventObject) => {
     eventObject.preventDefault();
     eventObject.stopPropagation();
@@ -149,8 +154,6 @@ $("body").on("mousedown touchstart", ".settings-slider", async (eventObject) => 
 async function setSliderPosition(eventObject) {
     eventObject.preventDefault();
     eventObject.stopPropagation();
-
-    if (eventObject.type == "touchmove") document.innerHTML = "touchmove"
 
     let clientX;
     if (eventObject.type == "touchmove" || eventObject.type == "touchstart") {
@@ -182,6 +185,7 @@ async function cancelSlider(eventObject) {
     document.removeEventListener("touchend", cancelSlider);
 }
 
+$("body").off("click touchend", ".settings-slider .settings-choice-scroll-button");
 $("body").on("click touchend", ".settings-slider .settings-choice-scroll-button", async (eventObject) => {
     const settingsElement = eventObject.currentTarget.closest(".settings-element");
     let percentage = parseInt(settingsElement.querySelector(".settings-slider-value").innerHTML);
@@ -197,6 +201,7 @@ $("body").on("click touchend", ".settings-slider .settings-choice-scroll-button"
     settingsElement.querySelector(".settings-choice-slider-progress").style.width = `${percentage}%`
 })
 
+$("body").off("mouseup touchend", ".settings-slider");
 $("body").on("mouseup touchend", ".settings-slider", async (eventObject) => {
     localStorage.setItem(eventObject.currentTarget.getAttribute("setting-changed"), parseInt(eventObject.currentTarget.closest(".settings-element").querySelector(".settings-slider-value").innerHTML));
     eval(`${eventObject.currentTarget.getAttribute("setting-changed")} = ${localStorage.getItem(eventObject.currentTarget.getAttribute("setting-changed"))/100}`);
