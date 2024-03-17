@@ -41,7 +41,7 @@ url = "https://youtube.com/@ZxSlug"
 icon_path = "svg/socials/youtube_logo.svg"
 
 [social.tiktok]
-enabled = true
+enabled = false
 url = "https://tiktok.com/@ZxSlug"
 icon_path = "svg/socials/tiktok_logo.svg"
 
@@ -54,6 +54,11 @@ icon_path = "svg/socials/roblox_logo.svg"
 enabled = true
 url = "https://discord.com/users/1010989813874311199"
 icon_path = "svg/socials/discord_logo.svg"
+
+[social.newgrounds]
+enabled = true
+url = "https://zxslug.newgrounds.com"
+icon_path="svg/socials/newgrounds_logo.svg"
 
 
 [resources]
