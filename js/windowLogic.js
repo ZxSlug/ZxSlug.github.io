@@ -9,7 +9,7 @@ import('https://cdn.jsdelivr.net/npm/smol-toml@1.1.4/+esm').then((toml) => {
     parse = toml.parse;
 });
 
-var colorArray = {
+var colorAssociations = {
     "purple": [155, 54, 255],
     "blue": [180, 145, 255],
     "cyan": [180, 255, 255],
@@ -20,14 +20,15 @@ var colorArray = {
     "orange": [230, 215, 155],
     "white": [255, 255, 255]
 }
+var colorArray = Object.keys(colorAssociations);
 
-volume = localStorage.getItem("volume") !== null? localStorage.getItem("volume")/100 : 1;
+volume = localStorage.getItem("volume") !== null? localStorage.getItem("volume") : 1;
 var rgb = false;
 
 function getRGBValues(hex) {
     const regex = /^#?([A-Fa-f0-9]{3}){1,2}$/m;
 
-    if (regex.test(hex) || hex in colorArray) {
+    if (regex.test(hex) || hex in colorAssociations) {
         localStorage.setItem("theme-color", hex)
     }
 
@@ -46,15 +47,41 @@ function getRGBValues(hex) {
             }
         }
     } else {
-        if (hex in colorArray) {
+        if (hex in colorAssociations) {
             return {
-                red: colorArray[hex][0],
-                green: colorArray[hex][1],
-                blue: colorArray[hex][2]
+                red: colorAssociations[hex][0],
+                green: colorAssociations[hex][1],
+                blue: colorAssociations[hex][2]
             }
         }
         return null;
     }
+}
+
+async function changeVolume(sliderObject) {
+    localStorage.setItem("volume", sliderObject.value/100);
+    volume = sliderObject.value/100;
+}
+
+async function applyColor(scroll) {
+    localStorage.setItem("theme-color", scroll.value);
+    const rgbFromText = getRGBValues(scroll.value);
+    if (rgbFromText !== null) {
+        document.querySelector(":root").style.setProperty("--theme-color", `${rgbFromText.red}, ${rgbFromText.green}, ${rgbFromText.blue}`);
+    }
+}
+
+function getVolume() {
+    return localStorage.getItem("volume")*100 || 100;
+}
+
+function getTheme() {
+    return localStorage.getItem("theme-color") || "Purple";
+}
+
+function checkColor(scroll) {
+    const regex = /^#?([A-Fa-f0-9]{3}){1,2}$/m;
+    return (scroll.input in colorAssociations || regex.test(scroll.input));
 }
 
 if (localStorage.getItem("theme-color") !== undefined) {
@@ -113,7 +140,11 @@ async function windowHoldStart(eventObject) {
     activeWindowObject = eventObject.currentTarget.parentElement;
 
     if (activeWindowObject.classList.contains("maximized-window")) {
-        return;
+        if (mobileMode) {
+            return;
+        } else {
+            activeWindowObject.classList.remove("maximized-window");
+        }
     }
 
     let windowBounding = activeWindowObject.getBoundingClientRect();

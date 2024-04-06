@@ -15,11 +15,11 @@ if (localStorage.getItem("localstorage-warning") == undefined) {
 if (localStorage.getItem("theme-color") != null) {
     $(".settings-theme-color .settings-choice-value").text(localStorage.getItem("theme-color"));
 }
-if (localStorage.getItem("volume") != null) {
+/* if (localStorage.getItem("volume") != null) {
     $(".settings-volume")[0].closest(".settings-element").querySelector(".settings-slider-value").innerHTML = localStorage.getItem("volume");
     $(".settings-volume .settings-choice-slider-thumb").css("left", `${localStorage.getItem("volume")-(localStorage.getItem("volume")-50)*0.08-5}%`);
     $(".settings-volume .settings-choice-slider-progress").css("width", `${localStorage.getItem("volume")}%`)
-}
+} */
 
 $("body").on("keypress", ".settings-theme-color .settings-choice-value", async (eventObject) => {
     if (eventObject.which == 13) {
@@ -118,91 +118,4 @@ $("body").on("click", ".settings-theme-color .settings-choice-scroll-right", asy
     const rgbFromText = getRGBValues(Object.keys(colorArray)[index]);
     $(".settings-theme-color .settings-choice-value").text(localStorage.getItem("theme-color"));
     document.querySelector(":root").style.setProperty("--theme-color", `${rgbFromText.red}, ${rgbFromText.green}, ${rgbFromText.blue}`);
-});
-
-var sliderX;
-var sliderOffsetWidth;
-var sliderProgress;
-var sliderThumb;
-var settingsSliderValue;
-var sliderSetting;
-
-$("body").off("mousedown touchstart", ".settings-slider");
-$("body").on("mousedown touchstart", ".settings-slider", async (eventObject) => {
-    eventObject.preventDefault();
-    eventObject.stopPropagation();
-
-    if (eventObject.target.closest("settings-choice-scroll-button") != null ||
-        eventObject.target.classList.contains("settings-choice-scroll-button") ||
-        eventObject.target.parentElement.classList.contains("settings-choice-scroll-button")) return;
-
-    sliderSetting = eventObject.currentTarget.getAttribute("setting-changed");
-    sliderX = eventObject.currentTarget.getClientRects()[0].x;
-    sliderOffsetWidth = eventObject.currentTarget.querySelector(".settings-choice-slider").offsetWidth;
-    settingsSliderValue = eventObject.target.closest(".settings-element").querySelector(".settings-slider-value");
-    sliderProgress = eventObject.currentTarget.querySelector(".settings-choice-slider-progress");
-    sliderThumb = eventObject.currentTarget.querySelector(".settings-choice-slider-thumb");
-    setSliderPosition(eventObject);
-
-    document.onmousemove = setSliderPosition;
-    document.onmouseup = cancelSlider;
-
-    document.addEventListener("touchmove", setSliderPosition, { passive: false });
-    document.addEventListener("touchend", cancelSlider, { passive: false });
-});
-
-async function setSliderPosition(eventObject) {
-    eventObject.preventDefault();
-    eventObject.stopPropagation();
-
-    let clientX;
-    if (eventObject.type == "touchmove" || eventObject.type == "touchstart") {
-        clientX = eventObject.targetTouches[0].clientX;
-    } else {
-        clientX = eventObject.clientX;
-    }
-
-    let percentage = Math.floor((clientX - sliderX)/sliderOffsetWidth*100)-10;
-    if (percentage > 100) percentage = 100;
-    if (percentage < 0) percentage = 0;
-
-    settingsSliderValue.innerHTML = percentage;
-    sliderProgress.style.width = `${percentage}%`;
-    sliderThumb.style.left = `${percentage-(percentage-50)*0.08-5}%`;
-
-    localStorage.setItem(sliderSetting, percentage);
-    eval(`${sliderSetting} = ${percentage/100}`);
-}
-
-async function cancelSlider(eventObject) {
-    eventObject.preventDefault();
-    eventObject.stopPropagation();
-    
-    document.onmousemove = null;
-    document.onmouseup = null;
-
-    document.removeEventListener("touchmove", setSliderPosition);
-    document.removeEventListener("touchend", cancelSlider);
-}
-
-$("body").off("click touchend", ".settings-slider .settings-choice-scroll-button");
-$("body").on("click touchend", ".settings-slider .settings-choice-scroll-button", async (eventObject) => {
-    const settingsElement = eventObject.currentTarget.closest(".settings-element");
-    let percentage = parseInt(settingsElement.querySelector(".settings-slider-value").innerHTML);
-
-    if (eventObject.currentTarget.classList.contains("settings-choice-scroll-left")) {
-        if (percentage > 0) percentage--;
-    } else {
-        if (percentage < 100) percentage++;
-    }
-
-    settingsElement.querySelector(".settings-slider-value").innerHTML = percentage;
-    settingsElement.querySelector(".settings-choice-slider-thumb").style.left = `${percentage-(percentage-50)*0.08-5}%`;
-    settingsElement.querySelector(".settings-choice-slider-progress").style.width = `${percentage}%`
-})
-
-$("body").off("mouseup touchend", ".settings-slider");
-$("body").on("mouseup touchend", ".settings-slider", async (eventObject) => {
-    localStorage.setItem(eventObject.currentTarget.getAttribute("setting-changed"), parseInt(eventObject.currentTarget.closest(".settings-element").querySelector(".settings-slider-value").innerHTML));
-    eval(`${eventObject.currentTarget.getAttribute("setting-changed")} = ${localStorage.getItem(eventObject.currentTarget.getAttribute("setting-changed"))/100}`);
 });
