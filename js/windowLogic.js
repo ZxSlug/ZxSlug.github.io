@@ -212,6 +212,7 @@ $.ajax({
     url: `html/errorMessageTemplate.html`,
     success: (result) => {
         errorTemplateCode = result;
+        console.log(result)
     },
     error: (error) => {
         console.error(error, "Couldn't load errorMessage HTML. See error for more.")
@@ -227,6 +228,21 @@ var errorMessageSFX = [];
  */
 async function summonErrorMessage(messageText, messageButtons = []) {
 
+    // Temporary Fix
+    if (!errorTemplateCode) {
+        await $.ajax({
+            url: `html/errorMessageTemplate.html`,
+            success: (result) => {
+                errorTemplateCode = result;
+                console.log(result)
+            },
+            error: (error) => {
+                console.error(error, "Couldn't load errorMessage HTML. See error for more.")
+                return;
+            }
+        });
+    }
+
     if (errorMessageSFX.length == 0) {
         for (let i = 1; i <= 3; i++) {
             errorMessageSFX.push(new Audio(`./sounds/message_${i}.m4a`))
@@ -234,6 +250,7 @@ async function summonErrorMessage(messageText, messageButtons = []) {
     }
 
     let tempError = $.parseHTML(errorTemplateCode)[0];
+    console.log(errorTemplateCode)
     tempError.id = `error-${Math.floor(Math.random() * 1000000)}`;
 
     if (messageButtons.length > 0) {
