@@ -20,7 +20,7 @@ enabled = true
 
 [social.discord]
 enabled = false
-url = "placeholder.com"
+url = "https://discord.com/users/1010989813874311199"
 icon_path = "svg/socials/discord_logo.svg"
 
 [resources]
