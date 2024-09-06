@@ -1,0 +1,35 @@
+title = "Slug's SFX thing"
+
+[background]
+enabled = false
+filename = ""
+
+[met]
+enabled = false
+text = ""
+
+[description]
+enabled = true
+text = """
+    i do SFX too
+    you can check out stuff at the bottom idk (the animation is NOT mine)
+"""
+
+[social]
+enabled = true
+
+[social.discord]
+enabled = false
+url = "placeholder.com"
+icon_path = "svg/socials/discord_logo.svg"
+
+[resources]
+enabled = true
+
+[resources.pfp]
+enabled = false
+filename = ""
+
+[resources.sprites]
+enabled = true
+filename = "sfx_showcase.mp4"
