@@ -1,8 +1,8 @@
 title = "Slug's SFX thing"
 
 [background]
-enabled = false
-filename = ""
+enabled = true
+filename = "sfx_bg.png"
 
 [met]
 enabled = false
@@ -12,14 +12,15 @@ text = ""
 enabled = true
 text = """
     i do SFX too
-    you can check out stuff at the bottom idk (the animation is NOT mine)
+    you can check out stuff in the link below (the animation is NOT mine)
+    <a class="hoverable" draggable=false href="../images/sfx_showcase.mov">Video Link</a>
 """
 
 [social]
-enabled = true
+enabled = false
 
 [social.discord]
-enabled = false
+enabled = true
 url = "https://discord.com/users/1010989813874311199"
 icon_path = "svg/socials/discord_logo.svg"
 
@@ -31,5 +32,5 @@ enabled = false
 filename = ""
 
 [resources.sprites]
-enabled = true
-filename = "sfx_showcase.mp4"
+enabled = false
+filename = ""
