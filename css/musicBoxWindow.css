@@ -1,0 +1,15 @@
+.musicbox-window .window-content {
+    font-size: 1.5em;
+}
+
+/* .musicbox-name {
+    width: 30em;
+} */
+
+/* .musicbox-progressbar {} */
+
+.musicbox-options {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}

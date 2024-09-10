@@ -1,0 +1,24 @@
+.player-window .window-content {
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.player-button {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.player-playbutton, .player-pausebutton {
+    margin-top: -1em;
+    fill: rgb(var(--theme-color));
+    width: 3em;
+}
+
+.player-playbutton:hover, .player-pausebutton:hover {
+    fill: rgba(var(--theme-color), 0.5);
+}
+
+.player-window.maximized-window .player-button {
+    margin-bottom: 3em;
+}

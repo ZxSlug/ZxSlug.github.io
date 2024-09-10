@@ -1,3 +1,4 @@
+$("body").off("click", ".profile-scroll-left, .profile-scroll-right");
 $("body").on("click", ".profile-scroll-left, .profile-scroll-right", async (eventObject) => {
     loadProfilePage(eventObject.currentTarget.getAttribute("page-link"));
 })

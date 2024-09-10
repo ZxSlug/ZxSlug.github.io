@@ -13,7 +13,7 @@ enabled = true
 text = """
     i do SFX too
     you can check out stuff in the link below (the animation is NOT mine)
-    <a class="hoverable" draggable=false href="../images/sfx_showcase.mov">Video Link</a>
+    <a class="hoverable" href="javascript://undefined" onclick='loadWindowFromHTML(`playerWindow`, `sfx_showcase.mov`)'>Video Link</a> <a class='hoverable' href='../videos/sfx_showcase.mov'>(backup)</a>
 """
 
 [social]

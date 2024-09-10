@@ -212,7 +212,6 @@ $.ajax({
     url: `html/errorMessageTemplate.html`,
     success: (result) => {
         errorTemplateCode = result;
-        console.log(result)
     },
     error: (error) => {
         console.error(error, "Couldn't load errorMessage HTML. See error for more.")
@@ -228,21 +227,6 @@ var errorMessageSFX = [];
  */
 async function summonErrorMessage(messageText, messageButtons = []) {
 
-    // Temporary Fix
-    if (!errorTemplateCode) {
-        await $.ajax({
-            url: `html/errorMessageTemplate.html`,
-            success: (result) => {
-                errorTemplateCode = result;
-                console.log(result)
-            },
-            error: (error) => {
-                console.error(error, "Couldn't load errorMessage HTML. See error for more.")
-                return;
-            }
-        });
-    }
-
     if (errorMessageSFX.length == 0) {
         for (let i = 1; i <= 3; i++) {
             errorMessageSFX.push(new Audio(`./sounds/message_${i}.m4a`))
@@ -250,7 +234,6 @@ async function summonErrorMessage(messageText, messageButtons = []) {
     }
 
     let tempError = $.parseHTML(errorTemplateCode)[0];
-    console.log(errorTemplateCode)
     tempError.id = `error-${Math.floor(Math.random() * 1000000)}`;
 
     if (messageButtons.length > 0) {
@@ -285,8 +268,9 @@ var taskbarTemplateCode;
 
 /** loadWindowFromHTML
  * @argument windowName Name of the file storing the window's HTML.
+ * @argument arguments (Optional) Arguments passed to the program
  */
-async function loadWindowFromHTML(windowName) {
+async function loadWindowFromHTML(windowName, arguments) {
     $.ajax({
         url: `html/${windowName}.html`,
         success: async (result) => {
@@ -312,6 +296,15 @@ async function loadWindowFromHTML(windowName) {
             }
 
             focusWindow($(`#${windowObject.id}`)[0]);
+
+            if (windowObject.hasAttribute("window-logic") && typeof eval(windowObject.getAttribute("window-logic")) == "function") {
+                const windowHTMLObject = $(`#${windowObject.id}`)[0];
+                if (arguments !== undefined && arguments !== "") {
+                    eval(`${windowObject.getAttribute("window-logic")}(windowHTMLObject, "${arguments}")`);
+                } else {
+                    eval(`${windowObject.getAttribute("window-logic")}(windowHTMLObject)`);
+                }
+            }
 
         },
         error: async (error) => {

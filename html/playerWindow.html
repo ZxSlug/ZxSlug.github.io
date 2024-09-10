@@ -1,0 +1,11 @@
+<div class="window player-window" window-titlebar-name="Video Player" window-titlebar-icon="apps/player_app_icon" window-logic="testPlayer" has-maximize-button="false">
+    <div class="window-content">
+        <video class="playervideo" draggable=false src="" autoplay playsinline></video>
+        <twm-slider class="player-progressbar" min="0" max="180" step="1" button-step="10" default="0" onmodify="playerSliderModify(this)">0:00 / 0:00</twm-slider>
+        <div class="player-button">
+            <img src="svg/ui/play_button.svg" onload="SVGInject(this)" class="player-playbutton hoverable" draggable="false" style="display:none">
+            <img src="svg/ui/pause_button.svg" onload="SVGInject(this)" class="player-pausebutton hoverable" draggable="false">
+        </div>
+    </div>
+    <script onload="test()" src="./js/playerWindow.js"></script>
+</div>
