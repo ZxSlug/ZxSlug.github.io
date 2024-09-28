@@ -76,12 +76,17 @@ a {
     width: 100%;
     height: 100%;
 
-    display: table;
+    display: grid;
+
+    grid-auto-flow: column;
+
+    grid-template-rows: repeat(auto-fill, minmax(8em, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(11em, 1fr)); 
 
     padding: 1em;
 }
 
-.desktop-icon {
+.desktop-icon, #desktop-icon-indicator {
     display: flex;
     flex-direction: column;
 
@@ -102,6 +107,11 @@ a {
     margin-right: auto;
 
     background-color: black;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 9em;
 }
 
 .desktop-icon-icon {
@@ -116,7 +126,7 @@ a {
     filter: drop-shadow(0.20em 0.20em black);
 }
 
-.desktop-icon:hover:not(.highlighted-desktop-icon) {
+.desktop-icon:hover:not(.highlighted-desktop-icon), #desktop-icon-indicator {
     background-color: rgba(var(--theme-color), 0.16);
     box-shadow: inset 0 0 0 0.5em rgba(var(--theme-color), 0.33);
 }
@@ -236,7 +246,7 @@ a {
 .error-message-button {
     flex: 1;
 
-    max-width: 33%;
+/*     max-width: 33%; */
     width: max-content;
 
     height: 2em;

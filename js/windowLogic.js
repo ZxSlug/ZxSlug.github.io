@@ -9,6 +9,24 @@ import('https://cdn.jsdelivr.net/npm/smol-toml@1.1.4/+esm').then((toml) => {
     parse = toml.parse;
 });
 
+//localStorage.removeItem("icon-placement")
+
+var iconPlacement = localStorage.getItem("icon-placement") !== null? JSON.parse(localStorage.getItem("icon-placement")) : {}; 
+placeIcons();
+
+function placeIcons() {
+    try {
+        for (const [ iconIndex, iconPosition ] of Object.entries(iconPlacement)) {
+            if (iconPosition === undefined) continue;
+
+            $("#desktop")[0].children[iconIndex].style.gridColumn = iconPosition[0];
+            $("#desktop")[0].children[iconIndex].style.gridRow = iconPosition[1];
+        }
+    } catch (error) {
+        console.error("Failed to place icons in the saved location", error)
+    }
+}
+
 var colorAssociations = {
     "purple": [155, 54, 255],
     "blue": [180, 145, 255],
@@ -199,7 +217,7 @@ async function windowHoldDrag(eventObject) {
     taskbarFullscreenCheck()
 }
 
-async function windowHoldStop(eventObject) {
+async function windowHoldStop() {
     document.onmousemove = null;
     document.onmouseup = null;
 
@@ -571,16 +589,171 @@ $("body").on("click", "#desktop", async (eventObject) => {
     }
 });
 
-$("body").on("click touchmove", ".desktop-icon", async (eventObject) => {
+/* $("body").on("click", ".desktop-icon", async (eventObject) => {
     $(".highlighted-desktop-icon").removeClass("highlighted-desktop-icon");
     eventObject.currentTarget.classList.add("highlighted-desktop-icon");
     $(".focused-window").removeClass("focused-window");
 
     $(".taskbar-icon-active").addClass("taskbar-icon-inactive");
     $(".taskbar-icon-active").removeClass("taskbar-icon-active");
+}); */
+
+var iconSizeX = 0;
+var iconSizeY = 0;
+
+var oldGridX = null;
+var oldGridY = null;
+$("body").on("mousedown touchstart", ".desktop-icon", async (eventObject) => {
+    eventObject.preventDefault();
+    eventObject.stopPropagation();
+
+    $(".highlighted-desktop-icon").removeClass("highlighted-desktop-icon");
+    eventObject.currentTarget.classList.add("highlighted-desktop-icon");
+    $(".focused-window").removeClass("focused-window");
+
+    $(".taskbar-icon-active").addClass("taskbar-icon-inactive");
+    $(".taskbar-icon-active").removeClass("taskbar-icon-active");
+
+    if (eventObject.type == "touchstart") {
+        mouseInitialX = eventObject.changedTouches[0].clientX;
+        mouseInitialY = eventObject.changedTouches[0].clientY;
+    } else {
+        mouseInitialX = eventObject.clientX;
+        mouseInitialY = eventObject.clientY;
+    }
+
+    activeWindowObject = eventObject.currentTarget;
+
+    let windowBounding = activeWindowObject.getBoundingClientRect();
+    activeWindowX = windowBounding.x;
+    activeWindowY = windowBounding.y;
+    
+    iconSizeX = windowBounding.width*1.033;
+    iconSizeY = windowBounding.height*1.033;
+
+    oldGridX = activeWindowObject.style.gridColumn;
+    oldGridY = activeWindowObject.style.gridRow;
+
+    document.onmousemove = iconHoldDrag;
+    document.onmouseup = iconHoldStop;
+
+    document.addEventListener("touchmove", iconHoldDrag, { passive: false });
+    document.addEventListener("touchend", iconHoldStop, { passive: false });
+
+    const mouseDownSFX = new Audio("./sounds/mouse_down.m4a");
+    mouseDownSFX.volume = volume;
+    mouseDownSFX.muted = (volume == 0);
+    mouseDownSFX.play();
 });
 
+var gridX = 1;
+var gridY = 1;
+var movedIcon = false;
+async function iconHoldDrag(eventObject) {
+    eventObject.preventDefault();
+    eventObject.stopPropagation();
+
+    movedIcon = true;
+
+    activeWindowObject.style.position = "absolute";
+    activeWindowObject.style.gridColumn = null;
+    activeWindowObject.style.gridRow = null;
+
+    activeWindowObject.classList.add("grabbable");
+    activeWindowObject.classList.remove("hoverable");
+    
+    $("#cursor").removeClass("hovering-cursor").addClass("grab-hold-cursor");
+
+    if (eventObject.type == "touchmove") {
+        clientX = eventObject.targetTouches[0].clientX;
+        clientY = eventObject.targetTouches[0].clientY;
+    } else {
+        clientX = eventObject.clientX;
+        clientY = eventObject.clientY;
+    }
+
+    let mouseDeltaX = 0, mouseDeltaY = 0;
+
+    if (clientX > 0) {
+        mouseDeltaX = window.innerWidth > clientX? clientX - mouseInitialX : 0;
+    }
+
+    if (clientY > 0) {
+        mouseDeltaY = window.innerHeight > clientY? clientY - mouseInitialY : 0;
+    }
+
+    mouseInitialX = clientX;
+    mouseInitialY = clientY;
+
+    activeWindowX+=mouseDeltaX;
+    activeWindowY+=mouseDeltaY;
+
+    activeWindowObject.style.top = `${activeWindowY}px`;
+    activeWindowObject.style.left = `${activeWindowX}px`;
+
+    let currentX = activeWindowX + iconSizeX/2;
+    let currentY = activeWindowY + iconSizeY/2;
+
+    gridX = Math.floor(currentX/iconSizeX)+1;
+    gridX = Math.min(Math.floor(window.innerWidth/iconSizeX), gridX);
+
+    gridY = Math.floor(currentY/iconSizeY)+1;
+    gridY = Math.min(Math.floor(window.innerHeight/iconSizeY)-1, gridY);
+
+    $("#desktop-icon-indicator").css("display", "")
+    $("#desktop-icon-indicator").css("grid-column", gridX)
+    $("#desktop-icon-indicator").css("grid-row", gridY)
+
+    taskbarFullscreenCheck()
+}
+
+async function iconHoldStop() {
+    document.onmousemove = null;
+    document.onmouseup = null;
+
+    document.removeEventListener("touchmove", iconHoldDrag);
+    document.removeEventListener("touchend", iconHoldStop);
+
+    if (!movedIcon) return;
+    movedIcon = false;
+
+    $("#desktop-icon-indicator").css("display", "none");
+    $("#desktop-icon-indicator").css("grid-column", "");
+    $("#desktop-icon-indicator").css("grid-row", "");
+
+    activeWindowObject.classList.remove("grabbable");
+    activeWindowObject.classList.add("hoverable");
+
+    activeWindowObject.style.position = "";
+
+    let isPlaceable = true;
+    try {
+        Object.keys(iconPlacement).forEach(key => {
+            if (iconPlacement[key][0] == gridX && iconPlacement[key][1] == gridY) {
+                throw SyntaxError;
+            }
+        });
+    } catch (error) {
+        isPlaceable = false;
+    }
+
+    if (isPlaceable) {
+        activeWindowObject.style.gridColumn = gridX;
+        activeWindowObject.style.gridRow = gridY;
+    
+        iconPlacement[Array.from($("#desktop")[0].children).indexOf(activeWindowObject)] = [ gridX, gridY ];
+        localStorage.setItem("icon-placement", JSON.stringify(iconPlacement));
+    } else {
+        activeWindowObject.style.gridColumn = oldGridX;
+        activeWindowObject.style.gridRow = oldGridY;
+    }
+
+    $("#cursor").removeClass("grab-hold-cursor");
+}
+
 $("body").on("dblclick touchend", ".desktop-icon", async (eventObject) => {
+    if (movedIcon == true) return;
+
     $(".highlighted-desktop-icon").removeClass("highlighted-desktop-icon");
 
     if (eventObject.currentTarget.hasAttribute("focus-if-loaded") && $(`.${eventObject.currentTarget.getAttribute("focus-if-loaded")}`).length != 0) {
@@ -652,3 +825,9 @@ $("body").on("mousedown touchstart", ".grabbable", async (eventObject) => {
 $("body").on("mouseup touchend", async (eventObject) => {
     $("#cursor").removeClass("grab-hold-cursor");
 });
+
+// Simple functions
+
+async function loadVideo(link) {
+    loadWindowFromHTML("playerWindow", link);
+}
