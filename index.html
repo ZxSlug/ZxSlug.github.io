@@ -3,7 +3,8 @@
     <head>
         <!-- Essential stuff -->
         <meta charset="UTF-8">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript"></script>
+        <script src="deps/jquery.min.js" type="text/javascript"></script>
+        <script src="deps/svg-inject.min.js"></script>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="fonts/terminus.css">
@@ -20,44 +21,44 @@
         <link rel="stylesheet" href="css/playerWindow.css">
 
         <title>The World Machine</title>
-        <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-
-        <!-- SVGInject - vital -->
-        <script src="deps/svg-inject.min.js"></script>
-
-        <!-- Twemoji library -->
-        <script src="https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js" crossorigin="anonymous"></script> 
+        <link rel="icon" type="image/x-icon" href="/images/favicon.ico"> 
     </head>
     <body>
 
         <noscript>Enable JS pwease</noscript>
 
-        <div id="desktop">
-            <div class="hoverable desktop-icon" loads-app="profileWindow" focus-if-loaded="profile-window">
-                <img src="svg/apps/profile_app_icon.svg" onload="SVGInject(this)" class="desktop-icon-icon" draggable="false">
-                <span class="desktop-icon-name">Profile</span>
+        <div id="background">
+            <div id="desktop">
+                <div class="hoverable desktop-icon" loads-app="profileWindow" focus-if-loaded="profile-window">
+                    <img src="svg/apps/profile_app_icon.svg" onload="SVGInject(this)" class="desktop-icon-icon" draggable="false">
+                    <span class="desktop-icon-name">Profile</span>
+                </div>
+                <div class="hoverable desktop-icon" loads-app="settingsWindow" focus-if-loaded="settings-window">
+                    <img src="svg/apps/settings_app_icon.svg" onload="SVGInject(this)" class="desktop-icon-icon" draggable="false">
+                    <span class="desktop-icon-name">Settings</span>
+                </div>
+<!--                 <div class="hoverable desktop-icon" loads-app="comingSoon" focus-if-loaded="musicbox-window">
+                    <img src="svg/apps/musicbox_app_icon.svg" onload="SVGInject(this)" class="desktop-icon-icon" draggable="false">
+                    <span class="desktop-icon-name">Music Box</span>
+                </div> -->
+                <div class="hoverable desktop-icon fullscreen-desktop-icon" loads-app="fullscreen" focus-if-loaded="musicbox-window">
+                    <img src="svg/ui/maximize_button.svg" onload="SVGInject(this)" class="desktop-icon-icon" draggable="false">
+                    <span class="desktop-icon-name">Fullscreen</span>
+                </div>
+
+                <span id="desktop-icon-indicator" style="display: none"></span>
             </div>
-            <div class="hoverable desktop-icon" loads-app="settingsWindow" focus-if-loaded="settings-window">
-                <img src="svg/apps/settings_app_icon.svg" onload="SVGInject(this)" class="desktop-icon-icon" draggable="false">
-                <span class="desktop-icon-name">Settings</span>
+
+            <div id="taskbar">
+                <div id="taskbar-icons">
+
+                </div>
+                
+                <span id="taskbar-clock">11:59 PM</span>
+
+                <img src="svg/ui/taskbar_hide.svg" onload="SVGInject(this)" class="hoverable" id="taskbar-hide-button" draggable="false">
+                <img src="svg/ui/taskbar_unhide.svg" onload="SVGInject(this)" class="hoverable" id="taskbar-unhide-button" draggable="false">
             </div>
-<!--             <div class="hoverable desktop-icon" loads-app="comingSoon" focus-if-loaded="musicbox-window">
-                <img src="svg/apps/musicbox_app_icon.svg" onload="SVGInject(this)" class="desktop-icon-icon" draggable="false">
-                <span class="desktop-icon-name">Music Box</span>
-            </div> -->
-
-            <span id="desktop-icon-indicator" style="display: none"></span>
-        </div>
-
-        <div id="taskbar">
-            <div id="taskbar-icons">
-
-            </div>
-            
-            <span id="taskbar-clock">11:59 PM</span>
-
-            <img src="svg/ui/taskbar_hide.svg" onload="SVGInject(this)" class="hoverable" id="taskbar-hide-button" draggable="false">
-            <img src="svg/ui/taskbar_unhide.svg" onload="SVGInject(this)" class="hoverable" id="taskbar-unhide-button" draggable="false">
         </div>
 
         <script src="js/windowLogic.js"></script>

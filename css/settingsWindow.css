@@ -1,173 +1,20 @@
 .settings-content {
-/*     column-count: 2; */
-/*     padding: 0.5em; */
-
-    font-size: 1.5em;
-}
-
-.settings-element {
-    column-count: 1;
-
-    display: flex;
-    flex-direction: column;
-
-    margin: 1em;
-}
-
-.settings-element-label {
-    text-align: center;
-    margin-bottom: -0.5em;
-}
-
-.settings-choice-scroll {
-    height: 2.5em;
-    display: flex;
-    flex-direction: row;
-}
-
-.settings-choice-value {
-    text-align: center;
-    width: 100%;
-    min-width: 14em;
-
-    height: 2em;
-
-    border: 0.25em solid rgb(var(--theme-color));
-    box-sizing: border-box;
-
-    text-transform: capitalize;
-}
-
-.settings-choice-value-editable:hover {
-    border: 0.25em solid rgba(var(--theme-color), 0.5);
-}
-
-.settings-choice-value-editable:focus {
-    outline: none;
-    caret-color: transparent;
-    animation: selection-blink 1s step-end infinite;
-}
-
-@keyframes selection-blink {
-    0% {
-        border: 0.25em solid rgba(var(--theme-color), 0.5);
+    /*     column-count: 2; */
+    /*     padding: 0.5em; */
+    
+        font-size: 1.5em;
     }
-    50% {
-        border: 0.25em solid rgb(var(--theme-color));
+    
+    .settings-element {
+        column-count: 1;
+    
+        display: flex;
+        flex-direction: column;
+    
+        margin: 1em;
     }
-}
-
-.settings-choice-scroll-button {
-/*     fill: rbg(var(--theme-color)); */ /* This isn't working for whatever reason */
-    height: 2.5em;
-    margin-top: -0.25em;
-}
-
-.settings-choice-scroll-button:hover {
-    filter: brightness(50%);
-}
-
-.settings-choice-scroll-left {
-    fill: rgb(var(--theme-color))
-}
-
-.settings-choice-scroll-right {
-    fill: rgb(var(--theme-color))
-}
-
-.settings-button {
-    text-align: center;
-    width: 100%;
-    min-width: 14em;
-
-    height: 2em;
-
-    border: 0.25em solid rgb(var(--theme-color));
-    box-sizing: border-box;
-
-    margin-bottom: 0.5em;
-}
-
-.settings-button:hover {
-    border: 0.25em solid rgba(var(--theme-color), 0.5);
-}
-
-.settings-slider {
-    height: 2.5em;
-    display: flex;
-    flex-direction: row;
-}
-
-.settings-choice-slider {
-    position: relative;
-
-    width: 100%;
-    height: 0.5em;
-    border: 0.125em solid rgb(var(--theme-color));
-    box-sizing: border-box;
-    margin-top: 0.75em;
-}
-
-.settings-choice-slider-thumb {
-    position: absolute;
-    top: -250%;
-
-    fill: rgb(var(--theme-color));
-    height: 1.5em;
-}
-
-.settings-choice-slider-progress {
-    background-color: rgb(var(--theme-color));
-    position: absolute;
-
-    height: 100%;
-    width: 50%;
-}
-/* .settings-slider .settings-choice-scroll-button {
-    height: 2.5em;
-}
-
-.settings-slider-value {
-    -webkit-appearance: none;
-    appearance: none;
-    cursor: none;
-
-    height: 1em;
-    width: 100%;
-    outline: none;
-
-    margin-top: 1.5em;
-    margin-left: 0;
-    margin-right: 0;
-
-    background: black;
-    border: 0.25em solid rgb(var(--theme-color));
-    box-sizing: border-box;
-
-    overflow: hidden;
-}
-
-
-.settings-slider-value::moz-range-thumb {
-    appearance: none;
-    background-image: url("../svg/ui/slider_indicator.svg");
-}
-
-.settings-slider-value::-moz-range-progress {
-    background-color: rgb(var(--theme-color));
-    height: 1em;
-    width: 1em;
-}
-
-.settings-slider-value::-webkit-slider-thumb{
-    -webkit-appearance: none;
-    appearance: none;
-    background-image: url("../svg/ui/placeholder.svg");
-    background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
-    height: 1em;
-    width: 1em;
-    z-index: 3;
-    fill: gray;
-       box-shadow: -14.75em 0 0 15em rgb(var(--theme-color));; */
+    
+    .settings-element-label {
+        text-align: center;
+        margin-bottom: -0.5em;
+    }

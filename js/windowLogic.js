@@ -9,8 +9,6 @@ import('https://cdn.jsdelivr.net/npm/smol-toml@1.1.4/+esm').then((toml) => {
     parse = toml.parse;
 });
 
-//localStorage.removeItem("icon-placement")
-
 var iconPlacement = localStorage.getItem("icon-placement") !== null? JSON.parse(localStorage.getItem("icon-placement")) : {}; 
 placeIcons();
 
@@ -117,7 +115,8 @@ window.mobileCheck = function() {
 
 if (mobileCheck()) {
     document.querySelector(":root").style.setProperty("font-size", "1.75em");
-    $("#taskbar-hide-button, #taskbar-unhide-button").remove()
+    $("#taskbar-hide-button, #taskbar-unhide-button").remove();
+    $(".fullscreen-desktop-icon").remove();
     mobileMode = true;
 }
 
@@ -297,13 +296,19 @@ async function loadWindowFromHTML(windowName, arguments) {
             windowObject.id = `window-${Math.floor(Math.random() * 1000000)}`;
             
             if (mobileMode) windowObject.classList.add("maximized-window");
-            
-            windowObject = await addTitlebar(windowObject);
+
+            const hasTitlebar = windowObject.hasAttribute("has-titlebar")? JSON.parse(windowObject.getAttribute("has-titlebar")) : true;
+            if (hasTitlebar) {
+                windowObject = await addTitlebar(windowObject);
+            }
 
             $(".taskbar-icon-active").addClass("taskbar-icon-inactive");
             $(".taskbar-icon-active").removeClass("taskbar-icon-active");
 
-            windowObject.setAttribute("associated-taskbar", await createAssociatedTaskbarElement(windowObject, windowObject.id));
+            const hasTaskbarIcon = windowObject.hasAttribute("has-taskbar-icon")? JSON.parse(windowObject.getAttribute("has-taskbar-icon")) : true;
+            if (hasTaskbarIcon) {
+                windowObject.setAttribute("associated-taskbar", await createAssociatedTaskbarElement(windowObject, windowObject.id));
+            }
             
             $("body").prepend(windowObject.outerHTML);
 
@@ -354,14 +359,12 @@ async function createAssociatedTaskbarElement(windowObject, windowId) {
     let tempButton = $.parseHTML(taskbarTemplateCode)[0];
 
     let buttonText = tempButton.querySelector(".taskbar-icon-name");
-    let windowHeaderText = windowObject.querySelector(".window-header-text");
-    buttonText.innerText = windowHeaderText.innerText;
-    if (mobileMode) buttonText.innerText = "";
+    buttonText.innerText = mobileMode? "" : windowObject.getAttribute("window-titlebar-name");
 
     let buttonIcon = tempButton.querySelector(".taskbar-icon-icon");
-    let windowHeaderIcon = windowObject.querySelector(".window-icon");
-    if (windowHeaderIcon != undefined) {
-        buttonIcon.src = windowHeaderIcon.getAttribute("src");
+    const hasIcon = JSON.parse(windowObject.hasAttribute("has-icon")? windowObject.getAttribute("has-icon") : true);
+    if (windowObject.hasAttribute("window-titlebar-icon") && hasIcon) {
+        buttonIcon.src = `svg/${windowObject.getAttribute("window-titlebar-icon")}.svg`
     } else {
         buttonIcon.remove();
     }
@@ -589,15 +592,6 @@ $("body").on("click", "#desktop", async (eventObject) => {
     }
 });
 
-/* $("body").on("click", ".desktop-icon", async (eventObject) => {
-    $(".highlighted-desktop-icon").removeClass("highlighted-desktop-icon");
-    eventObject.currentTarget.classList.add("highlighted-desktop-icon");
-    $(".focused-window").removeClass("focused-window");
-
-    $(".taskbar-icon-active").addClass("taskbar-icon-inactive");
-    $(".taskbar-icon-active").removeClass("taskbar-icon-active");
-}); */
-
 var iconSizeX = 0;
 var iconSizeY = 0;
 
@@ -625,11 +619,9 @@ $("body").on("mousedown touchstart", ".desktop-icon", async (eventObject) => {
     activeWindowObject = eventObject.currentTarget;
 
     let windowBounding = activeWindowObject.getBoundingClientRect();
-    activeWindowX = windowBounding.x;
-    activeWindowY = windowBounding.y;
-    
+
     iconSizeX = windowBounding.width*1.033;
-    iconSizeY = windowBounding.height*1.033;
+    iconSizeY = windowBounding.height*1.06;
 
     oldGridX = activeWindowObject.style.gridColumn;
     oldGridY = activeWindowObject.style.gridRow;
@@ -672,33 +664,17 @@ async function iconHoldDrag(eventObject) {
         clientY = eventObject.clientY;
     }
 
-    let mouseDeltaX = 0, mouseDeltaY = 0;
-
-    if (clientX > 0) {
-        mouseDeltaX = window.innerWidth > clientX? clientX - mouseInitialX : 0;
-    }
-
-    if (clientY > 0) {
-        mouseDeltaY = window.innerHeight > clientY? clientY - mouseInitialY : 0;
-    }
-
-    mouseInitialX = clientX;
-    mouseInitialY = clientY;
-
-    activeWindowX+=mouseDeltaX;
-    activeWindowY+=mouseDeltaY;
+    activeWindowX=Math.min(Math.max(clientX - iconSizeX/2, 0), window.innerWidth - iconSizeX);
+    activeWindowY=Math.min(Math.max(clientY - iconSizeY/2, 0), window.innerHeight - iconSizeY);
 
     activeWindowObject.style.top = `${activeWindowY}px`;
     activeWindowObject.style.left = `${activeWindowX}px`;
 
-    let currentX = activeWindowX + iconSizeX/2;
-    let currentY = activeWindowY + iconSizeY/2;
+    gridX = Math.round(activeWindowX/iconSizeX)+1;
+    gridX = Math.min(Math.floor($("#desktop").width()/iconSizeX), gridX);
 
-    gridX = Math.floor(currentX/iconSizeX)+1;
-    gridX = Math.min(Math.floor(window.innerWidth/iconSizeX), gridX);
-
-    gridY = Math.floor(currentY/iconSizeY)+1;
-    gridY = Math.min(Math.floor(window.innerHeight/iconSizeY)-1, gridY);
+    gridY = Math.round(activeWindowY/iconSizeY)+1;
+    gridY = Math.min(Math.floor($("#desktop").height()/iconSizeY), gridY);
 
     $("#desktop-icon-indicator").css("display", "")
     $("#desktop-icon-indicator").css("grid-column", gridX)
@@ -748,7 +724,7 @@ async function iconHoldStop() {
         activeWindowObject.style.gridRow = oldGridY;
     }
 
-    $("#cursor").removeClass("grab-hold-cursor");
+    $("#cursor").removeClass("grab-hold-cursor").addClass("hovering-cursor");
 }
 
 $("body").on("dblclick touchend", ".desktop-icon", async (eventObject) => {

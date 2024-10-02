@@ -113,6 +113,15 @@ twm-scroll {
     animation: selection-blink 1s step-end infinite;
 }
 
+@keyframes selection-blink {
+    0% {
+        border: 0.25em solid rgba(var(--theme-color), 0.5);
+    }
+    50% {
+        border: 0.25em solid rgb(var(--theme-color));
+    }
+}
+
 .scroll-scroll-left, .scroll-scroll-right {
     height: 2.5em;
     margin-top: -0.25em;
@@ -121,4 +130,23 @@ twm-scroll {
 
 .scroll-scroll-left:hover, .scroll-scroll-right:hover {
     fill: rgba(var(--theme-color), 0.5);
+}
+
+/* Buttons */
+
+.twm-button {
+    text-align: center;
+    width: 100%;
+    min-width: 14em;
+
+    height: 2em;
+
+    border: 0.25em solid rgb(var(--theme-color));
+    box-sizing: border-box;
+
+    margin-bottom: 0.5em;
+}
+
+.twm-button:hover {
+    border: 0.25em solid rgba(var(--theme-color), 0.5);
 }

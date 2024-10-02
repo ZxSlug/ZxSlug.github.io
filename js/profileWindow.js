@@ -3,6 +3,16 @@ $("body").on("click", ".profile-scroll-left, .profile-scroll-right", async (even
     loadProfilePage(eventObject.currentTarget.getAttribute("page-link"));
 })
 
+$("body").off("mouseover", ".profile-tag-image");
+$("body").on("mouseover", ".profile-tag-image", async (eventObject) => {
+    eventObject.currentTarget.parentElement.querySelector(".profile-tag-descriptor").style.opacity=1;
+});
+
+$("body").off("mouseout", ".profile-tag-image");
+$("body").on("mouseout", ".profile-tag-image", async (eventObject) => {
+    eventObject.currentTarget.parentElement.querySelector(".profile-tag-descriptor").style.opacity=null;
+});
+
 var profilePages;
 var currentProfileIndex = 0;
 $.ajax({
@@ -32,6 +42,7 @@ async function loadProfilePage(pageNumber) {
             $(".profile-scroll-right").attr("page-link", (pageNumber != profilePages.length - 1 ? pageNumber + 1 : 0));
 
             changeBackground(pageInfo.background);
+            changeTags(pageInfo.tags)
             changeMet(pageInfo.met);
             changeDescription(pageInfo.description);
             changeSocials(pageInfo.social);
@@ -56,6 +67,40 @@ async function changeBackground(backgroundObject) {
         });
     } else {
         $(".profile-content").css("background-image", "");
+    }
+}
+
+// They made my oneshot woke oh noes 
+async function changeTags(tagsObject) {
+    if (!tagsObject) {
+        $(".profile-tags").css("visibility", "hidden");
+    }
+
+    if (tagsObject.enabled && Array.isArray(tagsObject.tags)) {
+        $(".profile-tags").empty()
+
+        if (tagsObject.tags.length != 0) {
+            $(".profile-tags").css("visibility", "");
+
+            for (const tag of tagsObject.tags) {
+                const tagObject = document.createElement("div");
+                tagObject.classList.add("profile-tag-item");
+
+                const tagDescriptorObject = document.createElement("span");
+                tagDescriptorObject.classList.add("profile-tag-descriptor");
+                tagDescriptorObject.innerHTML = `This user is ${tag}`
+                
+                const tagImageObject = document.createElement("img")
+                tagImageObject.src = `./svg/apps/profile/tags/${tag}.svg`;
+                tagImageObject.classList.add("profile-tag-image", "hoverable")
+                tagImageObject.setAttribute("onload", "SVGInject(this);");
+                
+                tagObject.append(tagDescriptorObject, tagImageObject)
+                $(".profile-tags").append(tagObject.outerHTML);
+            }
+        } else {
+            console.warn("The tags object has no elements. There will no tags added.")
+        }
     }
 }
 

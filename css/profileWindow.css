@@ -67,6 +67,42 @@ a {
     margin-bottom: 1em;
 }
 
+.profile-tags {
+    height: 1.5em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: -1.5em;
+
+    display: flex;
+}
+
+.profile-tag-item {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-tags svg {
+    height: 1.5em;
+    filter: drop-shadow(0.15em 0.15em 0em black);
+    margin: 0.25em;
+}
+
+.profile-tag-descriptor {
+    position: absolute;
+    width: max-content;
+
+    padding: 0.5em;
+    bottom: 1.5em;
+
+    color: white;
+    background-color: #0000007F;
+    z-index: 4;
+
+    transition: 0.25s;
+    opacity: 0;
+}
+
 .profile-met {
     color: white;
     text-shadow: black 0.1em 0.1em;
@@ -95,20 +131,28 @@ a {
 
 .profile-socials {
     margin-left: 0.5em;
-    display: flex;
-    flex-direction: column;
 
-    width: max-content;
+    height: max-content;
+    display: grid;
+    grid-gap: 0.5em;
+    grid-auto-flow: row;
 }
 
 .profile-social-link {
+    display: flex;
+    justify-content: center;
+
     width: 3em;
     height: 3em;
 
     background-color: #0000007F;
     padding: 0.5em;
     box-sizing: border-box;
-    margin-bottom: 0.5em;
+
+    svg {
+        width: 2em;
+        height: 2em;
+    }
 }
 
 .profile-social-link:hover {
@@ -117,7 +161,7 @@ a {
 
 .profile-social-link svg {
     fill: white;
-    filter: drop-shadow(0.15em 0.15em 0em black)
+    filter: drop-shadow(0.15em 0.15em 0em black);
 }
 
 .profile-images {
@@ -146,13 +190,13 @@ link {
             flex-direction: column;
         }
         .profile-socials {
-            flex-direction: row;
+            grid-auto-flow: column;
             margin-left: 0;
             margin-top: 0.5em;
         }
 
         .profile-social-link {
-            margin-right: 0.5em;
+            width: auto;
         }
     }
     

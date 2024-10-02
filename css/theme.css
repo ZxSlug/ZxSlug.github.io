@@ -2,7 +2,7 @@
 
 :root {
     --theme-color: 155, 54, 255; /* Default/fallback color */
-    --wallpaper-image: url("../images/wallpaper.png");
+    --wallpaper-image: url("../images/placeholder.webp");
 }
 
 body {
@@ -19,7 +19,7 @@ body {
     cursor: none;
 
     background-color: black;
-    background-image: var(--wallpaper-image);
+/*     background-image: var(--wallpaper-image); */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
@@ -71,10 +71,17 @@ a {
 
 /* Desktop stuff */
 
+#background {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+
 #desktop {
-    position: absolute;
     width: 100%;
     height: 100%;
+    flex: 1;
 
     display: grid;
 
@@ -246,8 +253,9 @@ a {
 .error-message-button {
     flex: 1;
 
-/*     max-width: 33%; */
+    max-width: 33%;
     width: max-content;
+    text-overflow: ellipsis ;
 
     height: 2em;
     line-height: 2.75em;
@@ -272,7 +280,6 @@ a {
 /* Taskbar */
 
 #taskbar {
-    position: fixed;
     bottom: 0;
     width: 100%;
     height: 6em;
