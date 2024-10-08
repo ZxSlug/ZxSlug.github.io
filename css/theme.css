@@ -2,7 +2,7 @@
 
 :root {
     --theme-color: 155, 54, 255; /* Default/fallback color */
-    --wallpaper-image: url("../images/placeholder.webp");
+    --wallpaper-image: url("../images/background.png");
 }
 
 body {
@@ -19,7 +19,7 @@ body {
     cursor: none;
 
     background-color: black;
-/*     background-image: var(--wallpaper-image); */
+    background-image: var(--wallpaper-image);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
