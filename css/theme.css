@@ -2,7 +2,7 @@
 
 :root {
     --theme-color: 155, 54, 255; /* Default/fallback color */
-    --wallpaper-image: url("../images/background.png");
+    --wallpaper-image: url("../images/wallpaper.png");
 }
 
 body {
