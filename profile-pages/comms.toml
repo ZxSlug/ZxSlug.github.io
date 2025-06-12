@@ -1,4 +1,4 @@
-title = "ZxSlug's Comms"
+title = "ZxSlug's Portfolio"
 
 [background]
 enabled = true
@@ -13,8 +13,8 @@ text = "Moldova"
 [description]
 enabled = true
 text = """
-    I do commms
-    prices can be discussed in dms
+    I do things
+    discord link is my portfolio
     """
 
 
@@ -23,7 +23,7 @@ enabled = true
 
 [social.discord]
 enabled = true
-url = "https://discord.com/users/1010989813874311199"
+url = "https://discord.gg/7dvac795Ph"
 icon_path = "svg/socials/discord_logo.svg"
 
 
