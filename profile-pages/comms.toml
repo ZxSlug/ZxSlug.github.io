@@ -13,9 +13,9 @@ text = "Moldova"
 [description]
 enabled = true
 text = """
-    I do things
-    discord link is my portfolio
-    you can check out an example using the link below (the animation is NOT mine)
+    I only do commissions
+    prices can be discussed in dms
+    Click the discord button to get sent to my portfolio server
     <a class="hoverable" href="javascript://undefined" onclick='loadVideo(`sfx_showcase.mov`)'>Video Link</a> <a class='hoverable' href='../videos/sfx_showcase.mov'>(alt)</a>
     """
 
