@@ -16,7 +16,6 @@ text = """
     I only do commissions
     prices can be discussed in dms
     Click the discord button to get sent to my portfolio server
-    <a class="hoverable" href="javascript://undefined" onclick='loadVideo(`sfx_showcase.mov`)'>Video Link</a> <a class='hoverable' href='../videos/sfx_showcase.mov'>(alt)</a>
     """
 
 
