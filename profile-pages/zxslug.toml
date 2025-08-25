@@ -22,7 +22,6 @@ text = """
     youtube - @ZxSlug
     roblox - ZxSIug (with an i not an L)
     discord - @zxslug
-    newgrounds - zxslug.newgrounds.com
 
     """
 
@@ -55,10 +54,6 @@ enabled = true
 url = "https://discord.com/users/1010989813874311199"
 icon_path = "svg/socials/discord_logo.svg"
 
-[social.newgrounds]
-enabled = true
-url = "https://zxslug.newgrounds.com"
-icon_path="svg/socials/newgrounds_logo.svg"
 
 
 [resources]
