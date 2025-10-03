@@ -24,6 +24,11 @@ enabled = true
 url = "https://discord.com/users/1010989813874311199"
 icon_path = "svg/socials/discord_logo.svg"
 
+[social.twitter]
+enabled = true
+url = "https://twitter.com/SlugWav"
+icon_path = "svg/socials/twitter_logo.svg"
+
 [resources]
 enabled = true
 
