@@ -16,6 +16,7 @@ text = """
     I only do commissions
     prices can be discussed in dms
     Click the discord button to get sent to my portfolio server
+    Or the twitter button for the twitter page
     """
 
 
@@ -27,6 +28,10 @@ enabled = true
 url = "https://discord.gg/7dvac795Ph"
 icon_path = "svg/socials/discord_logo.svg"
 
+[social.twitter]
+enabled = true
+url = "https://twitter.com/SlugWav"
+icon_path = "svg/socials/twitter_logo.svg"
 
 [resources]
 enabled=true
