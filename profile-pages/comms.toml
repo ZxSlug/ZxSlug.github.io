@@ -17,6 +17,12 @@ text = """
     prices can be discussed in dms
     Click the discord button to get sent to my portfolio server
     Or the twitter button for the twitter page
+
+    Here are some things I did I guess (the animations are NOT mine)
+    <a class="hoverable" href="javascript://undefined" onclick='loadVideo(`sfx_showcase.mov`)'>Video Link #1</a> <a class='hoverable' href='../videos/sfx_showcase.mov'>(alt)</a>
+    <a class="hoverable" href="javascript://undefined" onclick='loadVideo(`jun.mov`)'>Video Link #2</a> <a class='hoverable' href='../videos/jun.mov'>(alt)</a>
+    <a class="hoverable" href="javascript://undefined" onclick='loadVideo(`mp4.mov`)'>Video Link #3</a> <a class='hoverable' href='../videos/mp4.mov'>(alt)</a>
+
     """
 
 
