@@ -22,6 +22,7 @@ text = """
     youtube - @ZxSlug
     roblox - ZxSIug (with an i not an L)
     discord - @slug.wav
+    ko-fi - zxslug
 
     """
 
@@ -54,6 +55,10 @@ enabled = true
 url = "https://discord.com/users/1010989813874311199"
 icon_path = "svg/socials/discord_logo.svg"
 
+[social.kofi]
+enabled = true
+url = "https://ko-fi.com/zxslug"
+icon_path = "svg/socials/kofi_logo.svg"
 
 
 [resources]
