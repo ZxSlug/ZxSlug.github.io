@@ -18,11 +18,7 @@ text = """
     Click the discord button to get sent to my portfolio server
     Or the twitter button for the twitter page
 
-    Here are some things I did I guess (the animations are NOT mine)
-    <a class="hoverable" href="javascript://undefined" onclick='loadVideo(`sfx_showcase.mov`)'>Video Link #1</a> <a class='hoverable' href='../videos/sfx_showcase.mov'>(alt)</a>
-    <a class="hoverable" href="javascript://undefined" onclick='loadVideo(`jun.mov`)'>Video Link #2</a> <a class='hoverable' href='../videos/jun.mov'>(alt)</a>
-    <a class="hoverable" href="javascript://undefined" onclick='loadVideo(`mp4.mov`)'>Video Link #3</a> <a class='hoverable' href='../videos/mp4.mov'>(alt)</a>
-
+    For payment I have kofi/my roblox group
     """
 
 
@@ -38,6 +34,12 @@ icon_path = "svg/socials/discord_logo.svg"
 enabled = true
 url = "https://twitter.com/SlugWav"
 icon_path = "svg/socials/twitter_logo.svg"
+
+[social.kofi]
+enabled = true
+url = "https://ko-fi.com/zxslug"
+icon_path = "svg/socials/kofi_logo.svg"
+
 
 [resources]
 enabled=true
